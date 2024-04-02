@@ -1,4 +1,5 @@
 import nltk
+# from nltk.tokenize import TreebankWordDetokenizer
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
@@ -10,7 +11,7 @@ import fitz
 def save_dataframe(df, save_folder, file_name):
     df.to_csv(save_folder + "/" + file_name + ".csv", index=False)
     print("save the dataframe to {}".format(save_folder + "/" + file_name + ".csv"))
-    df.to_json(save_folder + "/" + file_name + ".json", orient='table',index=False)
+    df.to_json(save_folder + "/" + file_name + ".json",orient='table', index=False)
     print("save the dataframe to {}".format(save_folder + "/" + file_name + ".json"))
     
 
@@ -34,7 +35,7 @@ def open_file(pdf_file):
 
     
 # text parameter is a string type, which will be cleaned.
-def clean_text(paragraph):
+def clean_text(paragraph, tokenizer, lemmatizer, stopwords):
 
     text = str(paragraph).lower()  # Lowercase words
     text = re.sub(r"\[(.*?)\]", "", text)  # Remove [+XYZ chars] in content
@@ -44,9 +45,18 @@ def clean_text(paragraph):
     text = re.sub(
         f"[{re.escape(string.punctuation)}]", "", text
     )  # Remove punctuation
+    text = re.sub(r"(\n|\r)", " ", text)
 
-    return text
+    tokens = tokenizer(text)  # Get tokens from text
+    tokens = [t for t in tokens if not t in stopwords]  # Remove stopwords
+    tokens = ["" if t.isdigit() else t for t in tokens]  # Remove digits
+    tokens = [t for t in tokens if len(t) > 1]  # Remove short tokens
 
+    # lemmatization
+    processed_text = ""
+    for token in tokens:
+        processed_text = processed_text + " " + lemmatizer.lemmatize(token)
+    return processed_text
 
 
 def find_section_titles(text, title_list):
@@ -74,9 +84,10 @@ def find_section_titles(text, title_list):
     total_seg = len(sections_pos)
     for i in range(total_seg):
         text_start_pos = sections_pos[i][1] + 1
-        if i == 0:
+        if i == 0 and sections_pos[i][0] > 0:
             sections_text.append(text[:text_start_pos])
-        elif i == total_seg - 1:
+            sections_title.insert(0, "section summary")
+        if i == total_seg - 1:
             sections_text.append(text[text_start_pos: ])
         else:
             text_end_pos = sections_pos[i+1][0]
@@ -110,12 +121,13 @@ def get_sub_toc(toc_title, table_of_content):
     return sub_toc
             
 
-
-
 def separate_content(text, table_of_content):
     print("starting looking for all the sections according to the provided section title info...")
     processed_content = []
     text = text.lower()
+
+    stop_words = set(stopwords.words('english'))
+    lemmatizer = WordNetLemmatizer()
 
     titles = get_first_level_toc(table_of_content)
     level1_titles, level1_texts = find_section_titles(text, titles)
@@ -126,7 +138,7 @@ def separate_content(text, table_of_content):
         level2_titles, level2_texts = find_section_titles(level1_texts[level1_index], sub_titles)
 
         if len(level2_titles) == 0 and len(level2_texts) == 0:
-            record = {"level_1": level1_title, "level_1_text": level1_texts[level1_index]}
+            record = {"level_1": level1_title, "level_1_text": clean_text(level1_texts[level1_index],word_tokenize, lemmatizer, stop_words)}
             processed_content.append(record)
         else:    
             for level2_index, level2_title in enumerate(level2_titles):
@@ -141,7 +153,7 @@ def separate_content(text, table_of_content):
                     if len(level3_titles) == 0 and len(level3_texts) == 0:
                         record = {"level_1": level1_title, 
                                   "level_2": level2_title,
-                                "level_2_content": clean_text(level2_texts[level2_index])}
+                                "level_2_content": clean_text(level2_texts[level2_index],word_tokenize, lemmatizer, stop_words)}
                         processed_content.append(record)
                     
                     else:
@@ -149,11 +161,11 @@ def separate_content(text, table_of_content):
 
                             record = {"level_1": level1_title, "level_2": level2_title, 
                                       "level_3": level3_title,
-                                    "level_3_content": clean_text(level3_texts[level3_index])}
+                                    "level_3_content": clean_text(level3_texts[level3_index], word_tokenize, lemmatizer, stop_words)}
                             processed_content.append(record)
                 else:
                     record = {"level_1": level1_title, "level_2": level2_title,
-                              "level_2_content": level2_texts[level2_index]}
+                              "level_2_content": clean_text(level2_texts[level2_index], word_tokenize, lemmatizer, stop_words)}
                     processed_content.append(record)
 
     ds = pd.DataFrame(processed_content)
