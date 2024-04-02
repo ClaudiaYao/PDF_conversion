@@ -39,13 +39,15 @@ def clean_text(paragraph, tokenizer, lemmatizer, stopwords):
 
     text = str(paragraph).lower()  # Lowercase words
     text = re.sub(r"\[(.*?)\]", "", text)  # Remove [+XYZ chars] in content
-    text = re.sub(r"\s+", " ", text)  # Remove multiple spaces in content
-    text = re.sub(r"\w+…|…", "", text)  # Remove ellipsis (and last word)
+    text = re.sub(r"\n", " ", text)        # remove \n, \r and text within ()
+    text = re.sub(r"\r", ' ', text)
+    text = re.sub(r"\(.+?\)", " ", text) 
+    text = re.sub(r"[0-9]+\.*[0-9]*", " ", text) # remove the words with digits
+    text = re.sub(r"\w+…|…", " ", text)  # Remove ellipsis (and last word)
     text = re.sub(r"(?<=\w)-(?=\w)", " ", text)  # Replace dash between words
+    text = re.sub(r"\s+", " ", text)  # Remove multiple spaces in content
     text = re.sub(
-        f"[{re.escape(string.punctuation)}]", "", text
-    )  # Remove punctuation
-    text = re.sub(r"(\n|\r)", " ", text)
+        f"[{re.escape(string.punctuation)}]", "", text)  # Remove punctuation
 
     tokens = tokenizer(text)  # Get tokens from text
     tokens = [t for t in tokens if not t in stopwords]  # Remove stopwords
@@ -53,10 +55,11 @@ def clean_text(paragraph, tokenizer, lemmatizer, stopwords):
     tokens = [t for t in tokens if len(t) > 1]  # Remove short tokens
 
     # lemmatization
-    processed_text = ""
-    for token in tokens:
-        processed_text = processed_text + " " + lemmatizer.lemmatize(token)
-    return processed_text
+    # processed_text = ""
+    # for token in tokens:
+    #     processed_text = processed_text + " " + lemmatizer.lemmatize(token)
+    # return processed_text
+    return ' '.join(tokens)
 
 
 def find_section_titles(text, title_list):
