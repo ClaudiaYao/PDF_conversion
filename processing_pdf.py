@@ -25,9 +25,11 @@ def open_file(pdf_file):
             raise RuntimeError()
 
         total_text = ""
+        total_pages = 0
         for page in doc.pages():
             total_text += page.get_text()
-        return doc, total_text
+            total_pages += 1
+        return doc, total_text, total_pages
 
     except:
         print("error when opening the pdf file {}".format(pdf_file))
@@ -43,7 +45,7 @@ def clean_text(paragraph, tokenizer, lemmatizer, stopwords):
     text = re.sub(r"\r", ' ', text)
     text = re.sub(r"\(.+?\)", " ", text) 
     text = re.sub(r"[0-9]+\.*[0-9]*", " ", text) # remove the words with digits
-    text = re.sub(r"\w+…|…", " ", text)  # Remove ellipsis (and last word)
+    text = re.sub(r"…", " ", text)  # Remove ellipsis
     text = re.sub(r"(?<=\w)-(?=\w)", " ", text)  # Replace dash between words
     text = re.sub(r"\s+", " ", text)  # Remove multiple spaces in content
     text = re.sub(
@@ -61,6 +63,107 @@ def clean_text(paragraph, tokenizer, lemmatizer, stopwords):
     # return processed_text
     return ' '.join(tokens)
 
+
+# ######### Continue this script .......................................
+# ######### several methods of using PyMuPDF ##########################
+# ######### refer to this page for the structure of blocks: https://pymupdf.readthedocs.io/en/latest/app1.html
+# ######## also refer to this page: https://pymupdf.readthedocs.io/en/latest/textpage.html#textpagedict
+
+# #####
+# '''
+# - use page.get_text("dict")["blocks"] to get all the blocks, including text and image blocks, then based on
+# their sequence, we could know which section the image is embedded into. the structure of block dictionary could refer
+# to the above link
+# - not sure the reason, but the charts and diagrams in academic paper could not be extracted, but the image could
+# be extracted from the file I prepared (for example, I create a Word cocument and insert text and image into it, convert
+# it to pdf), then I could extract both the text and image
+# https://stackoverflow.com/questions/69574624/how-extract-text-from-pdf-including-images-and-text
+# '''
+# pdf_file = "This is just test.pdf"
+# pdf_file = "An Empirical Survey on Long Document Summarization.pdf"
+# # pdf_file = "He_Deep_Residual_Learning_CVPR_2016_paper.pdf"
+# file = fitz.open(project_data_path + "/" + pdf_file)
+
+def get_page_sections(table_of_content, total_pages):
+    page_sections = {}
+
+    for item in table_of_content:
+        page_num = item[2]
+        if page_num not in page_sections: 
+            page_sections[page_num] = []
+        page_sections[page_num].append(item[1])
+
+    for page_num in range(1, total_pages + 1):
+        if page_num not in page_sections:
+            page_sections[page_num] = [page_sections[page_num-1][-1]]
+        else:
+            if page_num > 1:
+                page_sections[page_num].insert(0, page_sections[page_num-1][-1])
+    return page_sections
+
+def find_images(file_obj, table_of_content, total_pages, save_to_folder):
+
+    page_sections = get_page_sections(table_of_content, total_pages)
+    for page_index, page in enumerate(file_obj.pages(), start=1):
+        
+        # if no image on the current page, continue scanning the next page
+        image_list = page.get_images(full=True)
+        if len(image_list) == 0:
+            continue
+        # if there is only one section/sub-section, no need to check image's section location.
+        cur_page_sections = page_sections[page_index]
+        next_section_index = 1
+        ignore_check_section = False
+        if len(cur_page_sections) == 1:
+            ignore_check_section = True
+        else:
+            # check the appearance of the next section 
+            words = cur_page_sections[next_section_index].lower().split()
+            pattern = r"{}\.?(\s|\r|\n)+".format(words[0]) + ' '.join(words[1:])
+
+
+        blocks = page.get_text("dict")["blocks"]
+        image_index = 1
+        for block in blocks:
+            if block['type'] == 0:
+                if ignore_check_section:
+                    continue
+                for line in block['lines']:
+                    for span in line['spans']:
+                        print("span:", span)
+                        match = re.search(pattern, span['text'].lower())
+                        if match:
+                            cur_page_sections = page_sections[next_section_index]
+                            if next_section_index < len(cur_page_sections) - 1:
+                                next_section_index += 1
+                                words = cur_page_sections[next_section_index].lower().split()
+                                pattern = r"{}\.?(\s|\r|\n)+".format(words[0]) + ' '.join(words[1:])
+                            else:
+                                ignore_check_section = True
+                        
+            else:
+                img_byte = block['image']
+                prefix = "section" + cur_page_sections[next_section_index-1].split()[0].replace(".", "_")
+                img_file = f"{save_to_folder}/{prefix}_page{page_index}_{image_index}.jpg"
+
+                with open(img_file, "wb") as fh_image:
+                    fh_image.write(img_byte)
+                print("Save image to folder {}".format(img_file))
+                image_index += 1
+
+
+def clear_processed_folder(folder_path):
+    import os, shutil
+
+    for filename in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 def find_section_titles(text, title_list):
     sections_title, sections_pos = [], []
