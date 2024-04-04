@@ -134,7 +134,9 @@ def find_images(file_obj, table_of_content, total_pages, save_to_folder):
                         
             else:
                 # img_byte = block['image']     # comment this because using this could not save transparency channel images properly
-                prefix = "section_" + cur_page_sections[next_section_index-1].split()[0].replace(".", "")
+                # e.g. "3.2. Experiment Result", get "section_3_2"
+                #      "3.2 Experiment Result", also get "section_3_2"
+                prefix = "section_" + get_section_num(cur_page_sections[next_section_index-1])
 
                 ###### Xi's solution
                 if image_index > len(image_list):
@@ -283,9 +285,24 @@ def get_sub_toc(toc_title, table_of_content):
     return sub_toc
             
 
+def get_section_num(section_title):
+    section_num = section_title.split()[0]
+    if section_num[-1] == ".":
+        section_num = section_num[:-1]
+    return section_num.replace(".", "_")
+
+
+def build_initial_output_json(table_of_content):
+    json_dict = {}
+    titles = get_first_level_toc(table_of_content)
+
+    for title in titles:
+        json_dict[title] = {"Section_Num": get_section_num(title), 'Section': title, "Text": "", "Subsections": [],"Groundtruth": ""}
+    return json_dict
+
 def separate_content(text, table_of_content):
-    output_json_format = {}
     print("starting looking for all the sections according to the provided section title info...")
+    output_json_format = build_initial_output_json(table_of_content)
     processed_content = []
     text = text.lower()
 
@@ -306,7 +323,8 @@ def separate_content(text, table_of_content):
             record = {"level_1": level1_title, "level_1_content": content}
             processed_content.append(record)
             # json file requires special format
-            output_json_format[level1_title] = {'Section': level1_title, "Text": content, "Subsections": [],"Groundtruth": ""}
+            
+            output_json_format[level1_title] = {"Section_Num": get_section_num(level1_title), 'Section': level1_title, "Text": content, "Subsections": [],"Groundtruth": ""}
         else:    
             for level2_index, level2_title in enumerate(level2_titles):
             
@@ -323,12 +341,8 @@ def separate_content(text, table_of_content):
                                 "level_2_content": content}
                         processed_content.append(record)
                         
-
-                        if level1_title not in output_json_format:
-                            output_json_format[level1_title] = {'Section': level1_title, "Text": "", "Subsections": [],"Groundtruth": None}
-                        
-                        print(output_json_format[level1_title])
-                        output_json_format[level1_title]['Subsections'].append({"Section": level2_title, "Text": content, "Subsections": [],
+                        # print(output_json_format[level1_title])
+                        output_json_format[level1_title]['Subsections'].append({"Section_Num": get_section_num(level2_title) , "Section": level2_title, "Text": content, "Subsections": [],
                         "Groundtruth": ""})
                         
                     else:
@@ -338,13 +352,10 @@ def separate_content(text, table_of_content):
                                       "level_3": level3_title,
                                     "level_3_content": content}
                             processed_content.append(record)
-
-                        if level1_title not in output_json_format:
-                            output_json_format[level1_title] = {'Section': level1_title, "Text": "", "Subsections": [],"Groundtruth": None}
                             
                             for k, item in enumerate(output_json_format[level1_title]['Subsections']):
                                 if item['Section'] == level2_title:
-                                    output_json_format[level1_title]['Subsections'][k].append({"Section": level3_title, "Text": content, 
+                                    output_json_format[level1_title]['Subsections'][k].append({"Section_Num": get_section_num(level3_title), "Section": level3_title, "Text": content, 
                         "Groundtruth": ""})
                 else:
                     content = clean_text(level2_texts[level2_index], word_tokenize, lemmatizer, stop_words)
@@ -352,9 +363,7 @@ def separate_content(text, table_of_content):
                               "level_2_content": content}
                     processed_content.append(record)
 
-                    if level1_title not in output_json_format:
-                        output_json_format[level1_title] = {'Section': level1_title, "Text": "", "Subsections": [],"Groundtruth": None}
-                    output_json_format[level1_title]['Subsections'].append({"Section": level2_title, "Text": content, "Subsections": [],
+                    output_json_format[level1_title]['Subsections'].append({"Section_Num": get_section_num(level2_title), "Section": level2_title, "Text": content, "Subsections": [],
                     "Groundtruth": ""})
 
     
