@@ -185,7 +185,7 @@ def auto_find_toc(doc):
     sec_pattern_1 = re.compile(r'(\s|\n)([1-9]+\.?(\r\n|\n|\r|\s)+([A-Z][a-zA-Z-]+\s*)+)(\r|\n)')
     sec_pattern_2 = re.compile(r'(\s|\n)((I|V)+\.?(\r\n|\n|\r|\s)+([A-Z][a-zA-Z-]+\s*)+)(\r|\n)')
     subsec_pattern_1 = re.compile(r'(\b|\s|\r|\n|\r\n)([1-9]\.[1-9]+\.?(\n|\r|\s)+[A-Z][A-Za-z-]+(\s\w+)*)(\r|\n)+?')
-    subsec_pattern_2 = re.compile(r'(\b|\s|\r|\n|\r\n)((I|V)+\.[A-Ea-e]+\.?(\n|\r|\s)+[A-Z][A-Za-z-]+(\s\w+)*)(\r|\n)+?')
+    subsec_pattern_2 = re.compile(r'(\r|\n)([A-E]\.(\n|\r|\s)+([a-zA-Z-]+\s)+)')
     
 
     for page_index, page in enumerate(doc.pages(), start=1):
@@ -293,6 +293,7 @@ def separate_content(text, table_of_content):
     lemmatizer = WordNetLemmatizer()
 
     titles = get_first_level_toc(table_of_content)
+    
     level1_titles, level1_texts = find_section_titles(text, titles)
 
     for level1_index, level1_title in enumerate(level1_titles):
@@ -338,6 +339,9 @@ def separate_content(text, table_of_content):
                                     "level_3_content": content}
                             processed_content.append(record)
 
+                        if level1_title not in output_json_format:
+                            output_json_format[level1_title] = {'Section': level1_title, "Text": "", "Subsections": [],"Groundtruth": None}
+                            
                             for k, item in enumerate(output_json_format[level1_title]['Subsections']):
                                 if item['Section'] == level2_title:
                                     output_json_format[level1_title]['Subsections'][k].append({"Section": level3_title, "Text": content, 
