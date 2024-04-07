@@ -36,15 +36,20 @@ def get_truncated_prompt(prompt):
     return prompt
 
 def get_gpt_response(prompt):
-    response = client.chat.completions.create(
-      model="gpt-3.5-turbo-0125",
-      messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": prompt}
-      ]
-    )
+    try: 
+        response = client.chat.completions.create(
+        model="gpt-3.5-turbo-0125",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": prompt}
+        ]
+        )
 
-    return response.choices[0].message.content
+        return response.choices[0].message.content
+    except Exception as e:
+        # Handle the error appropriately
+        print("An error occurred:", e)
+        return ""
 
 def get_summaries(json):
     for section in json:
