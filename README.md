@@ -20,7 +20,7 @@
 6. Create a .env file and add OPENAI_API_KEY inside
 
 ## Function Usage: ##
-`processing_pdf.open_file`<br>
+- `processing_pdf.open_file`<br>
 Input: a pdf file's full path.<br> 
 Return: a pyMuPDF file object, the full text of the pdf file, total pages of the pdf<br>
 
@@ -43,6 +43,7 @@ Return: a composite list structure. An example is like this:<br>
  ```
 
  For each sub item, e.g. [2, '4.1 Setup', 4], "2" represents level 2 section (it is a sub section of "4 Experiments"), "4.1 Setup" is the title, "4" is the page. <br>
+ Note: this function is only used when the PDF file has not table of content. If the PDF file has table_of_content, just call `doc.get_toc()` to get table_of_content.
 
  - `processing_pdf.clear_processed_folder`<br>
  Input: the folder to get cleaned up<br>
