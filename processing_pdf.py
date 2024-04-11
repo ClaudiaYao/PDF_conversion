@@ -305,7 +305,11 @@ def find_section_titles(text, title_list):
     # find all the section titles and their positions in the text
     for _, title in enumerate(title_list):
         words = title.lower().split(" ", 1)
-        pattern = r"{}\.?(\s|\r|\n)+".format(words[0]) + words[1]
+        if len(words) > 1:
+            pattern = r"{}\.?(\s|\r|\n)+".format(words[0]) + words[1]
+        else:
+            # Some sections (e.g. Abstract) without section number
+            pattern = title
         matches = re.finditer(pattern, text.lower())
 
         find_pos = None
