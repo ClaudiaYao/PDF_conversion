@@ -48,15 +48,17 @@ def clean_text(paragraph, tokenizer, lemmatizer, stopwords):
     text = str(paragraph).lower()  # Lowercase words
     text = text.encode("ascii", "ignore")
     text = text.decode()
-    text = re.sub(r"\\u\.{4}", "", text)
     text = re.sub(r"\[.+?\]", "", text)  # Remove [+XYZ chars] in content
-    text = re.sub(r"\n", " ", text)        # remove \n, \r and text within ()
-    text = re.sub(r"\r", ' ', text)
-    text = re.sub(r"\.+?\)", "", text) 
+    text = re.sub(r"\\n", " ", text)        # remove \n, \r and text within ()
+    text = re.sub(r"\\r", ' ', text)
+    text = re.sub(r"\(.*?\)", "", text) 
+    text = re.sub(r"@math\d+", "", text)
     text = re.sub(r"[0-9]+\.*[0-9]*", "", text) # remove the words with digits
     text = re.sub(r"…", "", text)  # Remove ellipsis
-    text = re.sub(r"(?<=\w)-(?=\w)", " ", text)  # Replace dash between words
+    text = re.sub(r"\.\.\.", "", text)
     text = re.sub(r"\s+", " ", text)  # Remove multiple spaces in content
+    # text = re.sub(r"(?<=\w)-\s*(?=\w)", "", text)  # Replace dash between words
+    text = text.strip()
     # text = re.sub(
     #     f"[{re.escape(string.punctuation)}]", "", text)  # Remove punctuation
 
@@ -73,7 +75,9 @@ def clean_text(paragraph, tokenizer, lemmatizer, stopwords):
     # return ' '.join(tokens)
     return text
 
-
+# get possible section/subsections on each page.
+# for example, on table-of-content, it has [1, "Abstract", 1], [1, "1. Introduction", 2], [2, "1.1 Literature", 2], then on page 2, the text might be located in section "Abstract", "1. Introduction", or "1.1 Literature"
+# this function is mainly used to check which section/subsection an image belongs to.
 def get_page_sections(table_of_content, total_pages):
     page_sections = {}
 
@@ -91,7 +95,7 @@ def get_page_sections(table_of_content, total_pages):
                 page_sections[page_num].insert(0, page_sections[page_num-1][-1])
     return page_sections
 
-
+# find images from PDF file and save them to a folder. The code also finds the section/subsection the image belongs to.
 def find_images(file_obj, table_of_content, total_pages, save_to_folder):
 
     page_sections = get_page_sections(table_of_content, total_pages)
@@ -102,7 +106,7 @@ def find_images(file_obj, table_of_content, total_pages, save_to_folder):
         if len(image_list) == 0:
             continue
 
-        # if there is only one section/sub-section, no need to check image's section location.
+        # if there is only one section/sub-section, no need to check image's section because it definitely belongs to the only section.
         cur_page_sections = page_sections[page_index]
         next_section_index = 1
         ignore_check_section = False
@@ -120,22 +124,23 @@ def find_images(file_obj, table_of_content, total_pages, save_to_folder):
             if block['type'] == 0:
                 if ignore_check_section:
                     continue
+                
                 for line in block['lines']:
+                    text = ""
                     for span in line['spans']:
-                        match = re.search(pattern, span['text'].lower())
-                        if match:
-                            cur_page_sections = page_sections[next_section_index]
-                            if next_section_index < len(cur_page_sections) - 1:
-                                next_section_index += 1
-                                words = cur_page_sections[next_section_index].lower().split()
-                                pattern = r"{}\.?(\s|\r|\n)+".format(words[0]) + ' '.join(words[1:])
-                            else:
-                                ignore_check_section = True
+                        text += span['text']
+
+                    match = re.search(pattern, text.lower())
+                    if match:
+                        cur_page_sections = page_sections[next_section_index]
+                        if next_section_index < len(cur_page_sections) - 1:
+                            next_section_index += 1
+                            words = cur_page_sections[next_section_index].lower().split()
+                            pattern = r"{}\.?(\s|\r|\n)+".format(words[0]) + ' '.join(words[1:])
+                        else:
+                            ignore_check_section = True
                         
             else:
-                # img_byte = block['image']     # comment this because using this could not save transparency channel images properly
-                # e.g. "3.2. Experiment Result", get "section_3_2"
-                #      "3.2 Experiment Result", also get "section_3_2"
                 prefix = "section_" + get_section_num(cur_page_sections[next_section_index-1])
 
                 ###### Xi's solution
@@ -163,7 +168,7 @@ def find_images(file_obj, table_of_content, total_pages, save_to_folder):
                 # print("Save image to folder {}".format(img_file))
                 image_index += 1
 
-
+# each time when a new PDF file gets processed, clear up the "processed" folder
 def clear_processed_folder(folder_path):
     import os, shutil
 
@@ -177,19 +182,88 @@ def clear_processed_folder(folder_path):
         except Exception as e:
             print('Failed to delete %s. Reason: %s' % (file_path, e))
 
+# find title, authors, other meta data, and abstract on the first page of the paper
+# return the above information. If the information is missing, return empty string.
+def find_meta_data(file_obj, table_of_content):
+    
+    page = next(file_obj.pages())
+    blocks = page.get_text("dict")["blocks"]
 
-# this function is used when the paper has not table of content
+    if "abstract" in table_of_content[0][1].lower():
+        first_section_title = table_of_content[1][1]
+    else:
+        first_section_title = table_of_content[0][1]
+    section_num, section_title = first_section_title.lower().split(" ", 1)
+
+    title_block_start, authors_block_start, other_info_block_start, search_end = False, False, False, False
+    title, authors_info, other_meta, abstract = "", "", [], []
+    other_info = []
+    for block in blocks:
+        if block['type'] == 0:
+            font_size = block['lines'][0]['spans'][0]['size']
+
+            # check title
+            if font_size > 14:
+                if not title_block_start:
+                    title = ""
+                    for line in block['lines']:
+                        for span in line['spans']:
+                            title += span['text']
+                    # sometimes, the big font is just some disturbing elements
+                    if len(title) > 5:
+                        title_block_start = True
+                    continue
+
+            # both title and authors blocks have not started. The block might be header section.
+            if (not title_block_start) and (not authors_block_start):
+                continue
+            
+            # check authors info
+            if  title_block_start and (not authors_block_start) and (not other_info_block_start):
+                authors_block_start = True
+                authors_info = ""
+                for line in block['lines']:
+                    for span in line['spans']:
+                        authors_info += span['text']
+                other_info_block_start = True
+                continue
+            else:
+                # check the info below authors block, including the abstract section
+                text = ""
+                for line in block['lines']:
+                    for span in line['spans']:
+                        text += span['text']
+                
+                # have searched to the first section (usually it is 1. Introduction), stop searching
+                if section_num.lower() in text.lower() and section_title.lower() in text.lower():
+                    search_end = True
+                    break
+                other_info.append(text)
+
+    # separate into other meta info and abstract
+    other_info = ' '.join(other_info)
+    if "abstract" in other_info.lower():
+        pos = other_info.lower().index("abstract")
+        other_meta = other_info[: pos].strip()
+        abstract = other_info[pos + len("abstract"):]
+    else:
+        other_meta = ""
+        abstract = other_info.strip()
+
+    return title, authors_info, other_meta, abstract
+                
+
+# This function is used when the paper has not table of content. The code will use regular expression to map the table of content. However, it is better to manually check the generated table of content and then do some customization based on the auto-generated result.
 def auto_find_toc(doc):
     print("starting looking for all the sections...")
     toc = []
 
-    sections, sub_sections = [], []
     sec_pattern_1 = re.compile(r'(\s|\n)([1-9]+\.?(\r\n|\n|\r|\s)+([A-Z][a-zA-Z-]+\s*)+)(\r|\n)')
     sec_pattern_2 = re.compile(r'(\s|\n)((I|V)+\.?(\r\n|\n|\r|\s)+([A-Z][a-zA-Z-]+\s*)+)(\r|\n)')
     subsec_pattern_1 = re.compile(r'(\b|\s|\r|\n|\r\n)([1-9]\.[1-9]+\.?(\n|\r|\s)+[A-Z][A-Za-z-]+(\s\w+)*)(\r|\n)+?')
     subsec_pattern_2 = re.compile(r'(\r|\n)([A-E]\.(\n|\r|\s)+([a-zA-Z-]+\s)+)')
     
-
+    # Check each page and extract the text pattern which indicates it is section/subsection. The generated table-of-content follows the same format as the puMuPDF's generated one.
     for page_index, page in enumerate(doc.pages(), start=1):
             page_text = page.get_text()
             
@@ -223,15 +297,16 @@ def auto_find_toc(doc):
                     break         
     return toc
 
+# Analyze the given text and given sub-section titles, separate the text into sub-sections.
 def find_section_titles(text, title_list):
     sections_title, sections_pos = [], []
     find_pos = 0
 
     # find all the section titles and their positions in the text
-    for index, title in enumerate(title_list):
-        words = title.lower().split()
-        pattern = r"{}\.?(\s|\r|\n)+".format(words[0]) + ' '.join(words[1:])
-        matches = re.finditer(pattern, text)
+    for _, title in enumerate(title_list):
+        words = title.lower().split(" ", 1)
+        pattern = r"{}\.?(\s|\r|\n)+".format(words[0]) + words[1]
+        matches = re.finditer(pattern, text.lower())
 
         find_pos = None
         for match in matches:
@@ -249,17 +324,19 @@ def find_section_titles(text, title_list):
     for i in range(total_seg):
         text_start_pos = sections_pos[i][1] + 1
         if i == 0 and sections_pos[i][0] > 0:
-            sections_text.append(text[:text_start_pos])
-            sections_title.insert(0, "NA")
+            sections_text.insert(0, text[:sections_pos[i][0]])
+            sections_title.insert(0, "No_title")
+
         if i == total_seg - 1:
             sections_text.append(text[text_start_pos: ])
         else:
             text_end_pos = sections_pos[i+1][0]
             sections_text.append(text[text_start_pos: text_end_pos])
+        
 
     return sections_title, sections_text
 
-
+# get the first level section titles of table-of-content
 def get_first_level_toc(table_of_content):
     first_toc = []
 
@@ -268,7 +345,7 @@ def get_first_level_toc(table_of_content):
             first_toc.append(item[1])
     return first_toc
 
-
+# get the subsection titles of a specified section toc_title
 def get_sub_toc(toc_title, table_of_content):
     sub_toc = []
     found = False
@@ -284,14 +361,14 @@ def get_sub_toc(toc_title, table_of_content):
                 break
     return sub_toc
             
-
+# Extract the section_num. For example, a section in talbe-of-content shows [2, "2.3 Experiment result", 3], the section_num should be "2_3". This result is used when naming images which belong to this section.
 def get_section_num(section_title):
     section_num = section_title.split()[0]
     if section_num[-1] == ".":
         section_num = section_num[:-1]
     return section_num.replace(".", "_")
 
-
+# set up the json file field structure
 def build_initial_output_json(table_of_content):
     json_dict = {}
     titles = get_first_level_toc(table_of_content)
@@ -300,6 +377,15 @@ def build_initial_output_json(table_of_content):
         json_dict[title] = {"Section_Num": get_section_num(title), 'Section': title, "Text": "", "Subsections": [],"Groundtruth": ""}
     return json_dict
 
+def clean_section_title(title):
+    res = re.sub(r"\n", "", title)
+    res = re.sub(r"\r", "", res)
+    res = re.sub(r"\s+", " ", res)
+    res = res.strip()
+    return res
+
+
+# This is the main function to separate the content of a PDF into multiple section/subsections, extract images from the PDF file and naming them based on which sections they belong to.
 def separate_content(text, table_of_content):
     print("starting looking for all the sections according to the provided section title info...")
     output_json_format = build_initial_output_json(table_of_content)
@@ -310,7 +396,6 @@ def separate_content(text, table_of_content):
     lemmatizer = WordNetLemmatizer()
 
     titles = get_first_level_toc(table_of_content)
-    
     level1_titles, level1_texts = find_section_titles(text, titles)
 
     for level1_index, level1_title in enumerate(level1_titles):
@@ -319,7 +404,8 @@ def separate_content(text, table_of_content):
         level2_titles, level2_texts = find_section_titles(level1_texts[level1_index], sub_titles)
 
         if len(level2_titles) == 0 and len(level2_texts) == 0:
-            content = clean_text(level1_texts[level1_index],word_tokenize, lemmatizer, stop_words)
+            content = clean_text(level1_texts[level1_index], word_tokenize, lemmatizer, stop_words)
+            level1_title = clean_section_title(level1_title)
             record = {"level_1": level1_title, "level_1_content": content}
             processed_content.append(record)
             # json file requires special format
@@ -327,7 +413,11 @@ def separate_content(text, table_of_content):
             output_json_format[level1_title] = {"Section_Num": get_section_num(level1_title), 'Section': level1_title, "Text": content, "Subsections": [],"Groundtruth": ""}
         else:    
             for level2_index, level2_title in enumerate(level2_titles):
-            
+                
+                if level2_index == 0 and level2_title == "No_title":
+                    output_json_format[level1_title]['Text'] = clean_text(level2_texts[0],word_tokenize, lemmatizer, stop_words)
+                    continue
+
                 sub_titles = get_sub_toc(level2_title, table_of_content)
 
                 if len(sub_titles) != 0:
@@ -336,29 +426,40 @@ def separate_content(text, table_of_content):
                     # did not find any sub sections, then just record all the section text
                     if len(level3_titles) == 0 and len(level3_texts) == 0:
                         content = clean_text(level2_texts[level2_index],word_tokenize, lemmatizer, stop_words)
+                        level2_title = clean_section_title(level2_title)
                         record = {"level_1": level1_title, 
                                   "level_2": level2_title,
                                 "level_2_content": content}
                         processed_content.append(record)
                         
                         # print(output_json_format[level1_title])
+                        # print("level2 no title:", level2_title)
+                        # if level2_title == "No_title":
+                            
+                        # else:
                         output_json_format[level1_title]['Subsections'].append({"Section_Num": get_section_num(level2_title) , "Section": level2_title, "Text": content, "Subsections": [],
                         "Groundtruth": ""})
                         
                     else:
                         for level3_index, level3_title in enumerate(level3_titles):
                             content = clean_text(level3_texts[level3_index], word_tokenize, lemmatizer, stop_words)
+                            level3_title = clean_section_title(level3_title)
                             record = {"level_1": level1_title, "level_2": level2_title, 
                                       "level_3": level3_title,
                                     "level_3_content": content}
                             processed_content.append(record)
                             
+                            
                             for k, item in enumerate(output_json_format[level1_title]['Subsections']):
+                                print("when level 3 no title", item['Section'], level2_title)
                                 if item['Section'] == level2_title:
-                                    output_json_format[level1_title]['Subsections'][k].append({"Section_Num": get_section_num(level3_title), "Section": level3_title, "Text": content, 
-                        "Groundtruth": ""})
+                                    if level3_title == "No_title":
+                                        output_json_format[level1_title]['Subsections'][k]['Text'] = content
+                                    else:
+                                        output_json_format[level1_title]['Subsections'][k].append({"Section_Num": get_section_num(level3_title), "Section": level3_title, "Text": content, "Groundtruth": ""})
                 else:
                     content = clean_text(level2_texts[level2_index], word_tokenize, lemmatizer, stop_words)
+                    level2_title = clean_section_title(level2_title)
                     record = {"level_1": level1_title, "level_2": level2_title,
                               "level_2_content": content}
                     processed_content.append(record)
