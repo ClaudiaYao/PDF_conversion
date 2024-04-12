@@ -1,0 +1,118 @@
+[
+    {
+        "Section Name": "1 Introduction",
+        "Generated Summary": "Transformers have become the model of choice in natural language processing (nlp) in computer vision, however, convolutional architectures remain dominant. inspired by the transformer scaling successes in nlp, we experiment with applying a standard transformer directly to images, with the fewest possible modications. We find that large scale training trumps inductive bias."
+    },
+    {
+        "Section Name": "2 Related Work",
+        "Generated Summary": "transformers were proposed by vaswani et al. for machine translation. They have since be- come the state of the art method in many nlp tasks. We show that large scale pre training makes vanilla transformers competitive with (or even better than) state-of-the-art cnns."
+    },
+    {
+        "Section Name": "3 Method",
+        "Generated Summary": "CNN.com will feature iReporter photos in a weekly Travel Snapshots gallery. Please submit your best shots of the U.S. for next week. Visit CNN.com/Travel next Friday for a new gallery of snapshots from around the world. Please share your best photos of the world with CNN iReport."
+    },
+    {
+        "Section Name": "NA",
+        "Generated Summary": "In model design we follow the original transformer (vaswani et al., ) as closely as possible. We reshape the image x rhw c into a sequence of attened d patches xp rn(p c), where (h, w) is the resolution of the original image, c is the number of channels, and n is the resulting number of patches. The resulting sequence of embedding vectors serves as input to the encoder. We use standard learnable d position embeddings, since we have not observed signicant performance gains from using more advanced d aware positions."
+    },
+    {
+        "Section Name": "3.2 Fine-tuning and Higher Resolution",
+        "Generated Summary": "typically, we pre train vit on large datasets, and ne tune to (smaller) downstream tasks. for this, we remove the pre trained prediction head and attach a zero initialized d k feedforward layer. When feeding images of higher resolution, we keep the patch size the same, which results in a larger effective sequence length."
+    },
+    {
+        "Section Name": "4 Experiments",
+        "Generated Summary": "CNN.com will feature iReporter photos in a weekly Travel Snapshots gallery. Please submit your best shots of the U.S. for next week. Visit CNN.com/Travel next Friday for a new gallery of snapshots from around the world. Please share your best photos of the world with CNN iReport."
+    },
+    {
+        "Section Name": "NA",
+        "Generated Summary": "we evaluate the representation learning capabilities of resnet, vision transformer (vit), and the hybrid. to understand the data requirements of each model, we pre train on datasets of varying size. when considering the computational cost of pre training the model, vit performs very favourably, attaining state of the art on most recognition benchmarks at a lower pre training cost. lastly, we perform a small experiment using self supervision, and show that self supervised vit holds promise for the future."
+    },
+    {
+        "Section Name": "4.1 Setup",
+        "Generated Summary": "We train all models, including resnets, using adam (kingma & ba, ) with =, =, a batch size of and apply a high weight decay of. We found that, in contrast to common practices, adam works slightly better than sgd for resnets in our setting. We use a linear learning rate warmup and decay, see appendix b. for details. for ne tuning we use sgd with momentum, batch size, for all models. for imagenet results in table, we ne tuned at higher resolution: for vit l/ and for vit h/, and also used polyak & juditsky averaging with a factor of (ramachandran et al. ; wang et al., b). metrics."
+    },
+    {
+        "Section Name": "4.2 Comparison to State of the Art",
+        "Generated Summary": "We compare our largest models vit h/ and vit l/ to state of the art cnns from the literature. all models were trained on tpuv hardware, and we report the number of tpu v cores ( per chip) used for training multiplied by the training time in days. The smaller model pre trained on jft m outperforms bit l on all tasks, while requiring substantially less computational resources to train."
+    },
+    {
+        "Section Name": "4.3 Pre-training Data Requirements",
+        "Generated Summary": "Vit transformers perform well when pre trained on a large jft m dataset. with fewer inductive biases for vision than resnets, how crucial is the dataset size? we perform two series of experiments. first, we pre train vit models on datasets of increasing size. second, we train our models on random subsets of m, m, and m as well as the full jft- m."
+    },
+    {
+        "Section Name": "4.4 Scaling Study",
+        "Generated Summary": "we perform a controlled scaling study of different models by evaluating transfer performance from jft m. in this setting data size does not bottleneck the models performances, and we assess performance versus pre training cost of each model. model set includes: resnets, rx, rX rx and rx rx; vision transformers, vit b/, b/, l/, l/ and h/ pre trained for epochs; and hybrids, r+vit b/ b/ l/ l/."
+    },
+    {
+        "Section Name": "4.5 Inspecting Vision Transformer",
+        "Generated Summary": "Self attention allows vit to integrate information across the entire image even in the lowest layers. we investigate to what degree the network makes use of this capability. we compute the average distance in image space across which information is integrated, based on the attention weights (figure, right). this attention distance is analogous to receptive eld size in cnns."
+    },
+    {
+        "Section Name": "4.6 Self-supervision",
+        "Generated Summary": "transformers show impressive performance on nlp tasks. Much of their success stems not only from their excellent scalability but also from large scale self supervised pre training. We also perform a preliminary exploration on masked patch prediction for self supervision, mimicking the masked language modeling task used in bert."
+    },
+    {
+        "Section Name": "5 Conclusion",
+        "Generated Summary": "We have explored the direct application of transformers to image recognition. unlike prior works using self attention in computer vision, we do not introduce image specic inductive biases into the architecture. instead, we interpret an image as a sequence of patches and process it by a standard transformer encoder as used in nlp. this simple, yet scalable, strategy works surprisingly well when coupled with pre training on large datasets. thus, vision transformer matches or exceeds the state of the art on many image classication datasets."
+    },
+    {
+        "Section Name": "A Multihead Self-attention",
+        "Generated Summary": "standard qkv self attention is a popular building block for neural archi- tectures. multihead self attention (msa) is an extension of sa in which we run k self attention operations, called heads, in parallel. to keep compute and number of parameters constant when changing k, dh is typically set to d/k."
+    },
+    {
+        "Section Name": "B Experiment details",
+        "Generated Summary": "CNN.com will feature iReporter photos in a weekly Travel Snapshots gallery. Please submit your best shots of the U.S. for next week. Visit CNN.com/Travel next Friday for a new gallery of snapshots from around the world. Please share your best photos of the world with CNN iReport."
+    },
+    {
+        "Section Name": "C Additional Results",
+        "Generated Summary": "we report detailed results corresponding to the gures presented in the paper. table corresponds to figure from the paper and shows transfer performance of different vit models pre trained on datasets of increasing size. we show transfer accuracy on several datasets, as well as the pre training compute (in ex-aflops)"
+    },
+    {
+        "Section Name": "D Additional Analyses",
+        "Generated Summary": "CNN.com will feature iReporter photos in a weekly Travel Snapshots gallery. Please submit your best shots of the U.S. for next week. Visit CNN.com/Travel next Friday for a new gallery of snapshots from around the world. Please share your best photos of the world with CNN iReport."
+    },
+    {
+        "Section Name": "D.1 SGD vs. Adam for ResNets",
+        "Generated Summary": "resnets are typically trained with sgd and our use of adam as optimizer is quite unconventional. We compare the ne tuning published as a conference paper at iclr resnet resnetx dataset. adam pre training outperforms sgd pre training on most datasets and on average. this justies the choice to use adam as the optimizer."
+    },
+    {
+        "Section Name": "D.2 Transformer shape",
+        "Generated Summary": "we ran ablations on scaling different dimensions of the transformer architecture to nd out which are best suited for scaling to very large models. decreasing the patch size and thus increasing the effective sequence length shows surprisingly robust improvements without introducing parameters. these ndings suggest that compute might be a better predictor of performance than the number of parameters, and that scaling should emphasize depth over width if any."
+    },
+    {
+        "Section Name": "D.3 Head Type and class token",
+        "Generated Summary": "In order to stay as close as possible to the original transformer model, we made use of an additional token, which is taken as image representation. This token is then trans- formed into a class prediction via a small multi layer perceptron (mlp) with tanh as non linearity in the single hidden layer. this design is inherited from the transformer model for text, and we use it throughout the main paper."
+    },
+    {
+        "Section Name": "D.4 Positional Embedding",
+        "Generated Summary": "we ran ablations on different ways of encoding spatial information using positional embedding. we tried the following cases: providing no positional information: considering the inputs as a bag of patches. relative positional embeddings: considering relative distance between patches to en- code the spatial information as instead of their absolute position."
+    },
+    {
+        "Section Name": "D.5 Empirical Computational Costs",
+        "Generated Summary": "Vit models have speed comparable to similar resnets. Large vit models have a clear advantage in terms of memory efciency over resnet models. The theoretical bi quadratic scaling of vit with image size only barely starts happening for the largest models at the largest resolutions."
+    },
+    {
+        "Section Name": "D.6 Axial Attention",
+        "Generated Summary": "axial attention (huang et al., ; ho et al. ) is a simple, yet effective technique to run self- attention on large inputs that are organized as multidimensional tensors. The general idea of axial attention is to perform multiple attention operations, each along a single axis of the input tensor. Instead of applying -dimensional attention to the attened version of the inputs, each attention mixes information along a particular axis."
+    },
+    {
+        "Section Name": "D.7 Attention Distance",
+        "Generated Summary": "to understand how vit uses self attention to integrate information across the image, we analyzed the average distance spanned by attention weights at different layers. this attention distance is analogous to receptive eld size in cnns. as depth increases, attention distance increases for all heads. in the second half of the network, most heads attend widely across tokens."
+    },
+    {
+        "Section Name": "D.8 Attention Maps",
+        "Generated Summary": "to compute maps of the attention from the output token to the input space (figures and ), we used attention rollout (abnar & zuidema, ). briey, we averaged attention weights of vit- l/ across all heads and then recursively multiplied the weight matrices of all layers."
+    },
+    {
+        "Section Name": "D.9 ObjectNet Results",
+        "Generated Summary": "we also evaluate our agship vit h/ model on the objectnet benchmark following the evaluation setup in kolesnikov et. al. (2008) resulting in % top- accuracy and %Top accuracy.   \u00a0We\u00a0evaluated\u00a0our\u00a0agship\u00a0vit h/ on theobjectnet benchmark using the\u00a0evaluation setup in\u00a0kolesnikov\u00a0 et.al. ( 2008) resulting\u00a0in % Top accuracy and% Top accuracy."
+    },
+    {
+        "Section Name": "D.10 VTAB Breakdown",
+        "Generated Summary": "table shows the scores attained on each of the vtab k tasks. published as a conference paper at iclr figure : further example attention maps as in figure (random selection) table : breakdown of v tab k performance across tasks. caltech cifar- dtd flowers pets sunsvhn camelyon eurosat resisc retinopathy clevr count clevr dist dmlab dspr loc dspr ori kitti dist snorb azim snorb elev mean vit h/ (jft) vit l/ ( jft)"
+    },
+    {
+        "Section Name": "NA",
+        "Generated Summary": "Transformer architecture has become the de facto standard for natural language processing tasks. Its applications to computer vision remain limited. We show that a pure transformer applied directly to sequences of image patches can perform very well on image classication tasks. when pre trained on large amounts of data and transferred to multiple mid sized or small image recognition benchmarks."
+    }
+]
