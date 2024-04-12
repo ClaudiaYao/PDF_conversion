@@ -9,9 +9,13 @@ import pandas as pd
 import fitz
 import json
 
-def save_dataframe(df, json_dict, save_folder, file_name):
+def save_dataframe(df, df_meta, json_dict, save_folder, file_name):
     full_name = save_folder + "/" + file_name + ".csv"
     df.to_csv(full_name, index=False)
+    print("save the dataframe to {}".format(full_name))
+    
+    full_name = save_folder + "/" + file_name + "_meta.csv"
+    df_meta.to_csv(full_name, index=False)
     print("save the dataframe to {}".format(full_name))
 
     json_list = json.dumps(list(json_dict.values()))
@@ -203,16 +207,17 @@ def find_meta_data(file_obj, table_of_content):
             font_size = block['lines'][0]['spans'][0]['size']
 
             # check title
-            if font_size > 14:
+            if font_size > 11:
                 if not title_block_start:
                     title = ""
                     for line in block['lines']:
                         for span in line['spans']:
                             title += span['text']
-                    # sometimes, the big font is just some disturbing elements
-                    if len(title) > 5:
+                    # sometimes, the big font is just some disturbing elements, or arXiv tags
+                
+                    if len(title.split()) > 6:
                         title_block_start = True
-                    continue
+                        continue
 
             # both title and authors blocks have not started. The block might be header section.
             if (not title_block_start) and (not authors_block_start):
@@ -235,8 +240,7 @@ def find_meta_data(file_obj, table_of_content):
                         text += span['text']
                 
                 # have searched to the first section (usually it is 1. Introduction), stop searching
-                if section_num.lower() in text.lower() and section_title.lower() in text.lower():
-                    search_end = True
+                if (section_num.lower() in text.lower()) and (section_title.lower() in text.lower()):
                     break
                 other_info.append(text)
 
@@ -307,10 +311,11 @@ def find_section_titles(text, title_list):
         words = title.lower().split(" ", 1)
         if len(words) > 1:
             pattern = r"{}\.?(\s|\r|\n)+".format(words[0]) + words[1]
+            matches = re.finditer(pattern, text.lower())
         else:
-            # Some sections (e.g. Abstract) without section number
+            # Some sections (e.g. Abstract) without section number. To avoid finding the same words instead of section tile, keep the original capital
             pattern = title
-        matches = re.finditer(pattern, text.lower())
+            matches = re.finditer(pattern, text)
 
         find_pos = None
         for match in matches:
@@ -332,12 +337,17 @@ def find_section_titles(text, title_list):
             sections_title.insert(0, "No_title")
 
         if i == total_seg - 1:
-            sections_text.append(text[text_start_pos: ])
+            # usually the last part of the paper contains references. Cut out the last part
+            left_text = text[text_start_pos:]
+            if "References" in left_text:
+                left_text = left_text[:left_text.index("References")]
+            elif "REFERENCES" in left_text:
+                left_text = left_text[:left_text.index("REFERENCES")]
+            sections_text.append(left_text)
         else:
             text_end_pos = sections_pos[i+1][0]
             sections_text.append(text[text_start_pos: text_end_pos])
-        
-
+    
     return sections_title, sections_text
 
 # get the first level section titles of table-of-content
@@ -376,9 +386,12 @@ def get_section_num(section_title):
 def build_initial_output_json(table_of_content):
     json_dict = {}
     titles = get_first_level_toc(table_of_content)
+    if titles[0].lower() != "abstract":
+        titles.insert(0, "Abstract")
 
-    for title in titles:
+    for i, title in enumerate(titles):              
         json_dict[title] = {"Section_Num": get_section_num(title), 'Section': title, "Text": "", "Subsections": [],"Groundtruth": ""}
+
     return json_dict
 
 def clean_section_title(title):
@@ -400,9 +413,22 @@ def separate_content(text, table_of_content):
     lemmatizer = WordNetLemmatizer()
 
     titles = get_first_level_toc(table_of_content)
+    # this function removes the appendix and reference section, so the returned level1_titles and level1_texts will not contain the two categories
     level1_titles, level1_texts = find_section_titles(text, titles)
 
     for level1_index, level1_title in enumerate(level1_titles):
+        # We will not record the information in Reference or Appendix sections
+        if "Reference" in level1_title or "REFERENCE" in level1_title or \
+        "Appendix" in level1_title or "APPENDIX" in level1_title:
+            continue
+
+        if level1_index == 0 and level1_title == "No_title":
+            content = clean_text(level1_texts[0], word_tokenize, lemmatizer, stop_words)
+            record = {"level_1": "Abstract", "level_1_content": content}
+            processed_content.append(record)
+            output_json_format["Abstract"]["Text"] = content
+            continue
+
 
         sub_titles = get_sub_toc(level1_title, table_of_content)
         level2_titles, level2_texts = find_section_titles(level1_texts[level1_index], sub_titles)
@@ -417,7 +443,7 @@ def separate_content(text, table_of_content):
             output_json_format[level1_title] = {"Section_Num": get_section_num(level1_title), 'Section': level1_title, "Text": content, "Subsections": [],"Groundtruth": ""}
         else:    
             for level2_index, level2_title in enumerate(level2_titles):
-                
+                # this operation will put the abstract at the end of the
                 if level2_index == 0 and level2_title == "No_title":
                     output_json_format[level1_title]['Text'] = clean_text(level2_texts[0],word_tokenize, lemmatizer, stop_words)
                     continue
@@ -436,11 +462,6 @@ def separate_content(text, table_of_content):
                                 "level_2_content": content}
                         processed_content.append(record)
                         
-                        # print(output_json_format[level1_title])
-                        # print("level2 no title:", level2_title)
-                        # if level2_title == "No_title":
-                            
-                        # else:
                         output_json_format[level1_title]['Subsections'].append({"Section_Num": get_section_num(level2_title) , "Section": level2_title, "Text": content, "Subsections": [],
                         "Groundtruth": ""})
                         
@@ -455,7 +476,6 @@ def separate_content(text, table_of_content):
                             
                             
                             for k, item in enumerate(output_json_format[level1_title]['Subsections']):
-                                print("when level 3 no title", item['Section'], level2_title)
                                 if item['Section'] == level2_title:
                                     if level3_title == "No_title":
                                         output_json_format[level1_title]['Subsections'][k]['Text'] = content

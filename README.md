@@ -20,6 +20,7 @@
 6. Create a .env file and add OPENAI_API_KEY inside
 
 ## Function Usage: ##
+
 - `processing_pdf.open_file`<br>
 Input: a pdf file's full path.<br> 
 Return: a pyMuPDF file object, the full text of the pdf file, total pages of the pdf<br>
@@ -67,6 +68,13 @@ Return: a composite list structure. An example is like this:<br>
  After running this function, all the images are extracted into the specified folder. Each image is named by its location in a section/subsection.<br>
  Input: pyMuPDF file object, table of content, total pages of the PDF file, folder to save to.<br>
  Note: some diagrams made from Latex could not be extracted.<br>
+
+ ## Limitations ##
+ Although arXiv papers follow a standard template, PDF structure still has much flexibility in terms of section naming, white space variance, inconsistent table of content. The functionalities of this project could not ensure a successful info extraction of all the PDF files.  
+ 1. Diagrams drawn by Latex are not extracted.
+ 2. Image might be divided when getting extracted, breaking the integrity of the original one.
+ 3. The caption of the image could not be extracted.
+ 4. Auto extracted table of content could not match the real sections completely. No regular expression could cover all those different writing styles.
 
 ## Next Step ##
 1. bug fixing based on feedback
