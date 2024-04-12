@@ -9,9 +9,13 @@ import pandas as pd
 import fitz
 import json
 
-def save_dataframe(df, json_dict, save_folder, file_name):
+def save_dataframe(df, df_meta, json_dict, save_folder, file_name):
     full_name = save_folder + "/" + file_name + ".csv"
     df.to_csv(full_name, index=False)
+    print("save the dataframe to {}".format(full_name))
+    
+    full_name = save_folder + "/" + file_name + "_meta.csv"
+    df_meta.to_csv(full_name, index=False)
     print("save the dataframe to {}".format(full_name))
 
     json_list = json.dumps(list(json_dict.values()))
