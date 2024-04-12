@@ -9,9 +9,13 @@ import pandas as pd
 import fitz
 import json
 
-def save_dataframe(df, json_dict, save_folder, file_name):
+def save_dataframe(df, df_meta, json_dict, save_folder, file_name):
     full_name = save_folder + "/" + file_name + ".csv"
     df.to_csv(full_name, index=False)
+    print("save the dataframe to {}".format(full_name))
+    
+    full_name = save_folder + "/" + file_name + "_meta.csv"
+    df_meta.to_csv(full_name, index=False)
     print("save the dataframe to {}".format(full_name))
 
     json_list = json.dumps(list(json_dict.values()))
@@ -305,7 +309,10 @@ def find_section_titles(text, title_list):
     # find all the section titles and their positions in the text
     for _, title in enumerate(title_list):
         words = title.lower().split(" ", 1)
-        pattern = r"{}\.?(\s|\r|\n)+".format(words[0]) + words[1]
+        if len(words) == 2:
+            pattern = r"{}\.?(\s|\r|\n)+".format(words[0]) + words[1]
+        else:
+            pattern = r"{}\.?(\s|\r|\n)+".format(words[0])
         matches = re.finditer(pattern, text.lower())
 
         find_pos = None
