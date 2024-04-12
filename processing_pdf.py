@@ -259,6 +259,16 @@ def find_meta_data(file_obj, table_of_content):
 
 # This function is used when the paper has not table of content. The code will use regular expression to map the table of content. However, it is better to manually check the generated table of content and then do some customization based on the auto-generated result.
 def auto_find_toc(doc):
+    toc = doc.get_toc()
+    # clean up toc
+    if len(toc) > 0:
+        print("Auto generated table of content:")
+        for i in range(len(toc)):
+            toc[i][1] = toc[i][1]
+        return toc
+
+    print("***The paper has not table of content.*** Need to use regular expression to map table of content.")
+
     print("starting looking for all the sections...")
     toc = []
 
@@ -298,7 +308,8 @@ def auto_find_toc(doc):
                     search_result = True 
 
                 if search_result is False:
-                    break         
+                    break
+    print("Not satified the generated result or want to adjust? Build your own table of content by using this template:")         
     return toc
 
 # Analyze the given text and given sub-section titles, separate the text into sub-sections.
@@ -308,22 +319,23 @@ def find_section_titles(text, title_list):
 
     # find all the section titles and their positions in the text
     for _, title in enumerate(title_list):
-        words = title.lower().split(" ", 1)
+        words = title.lower().strip().split(" ", 1)
+        
         if len(words) > 1:
-            pattern = r"{}\.?(\s|\r|\n)+".format(words[0]) + words[1]
-            matches = re.finditer(pattern, text.lower())
+            pattern = r"(\r|\n)+" + words[0].strip() + r"\.?\s+" + words[1].strip()
+            match = re.search(pattern, text.lower())
         else:
             # Some sections (e.g. Abstract) without section number. To avoid finding the same words instead of section tile, keep the original capital
-            pattern = title
-            matches = re.finditer(pattern, text)
+            pattern = r"(\r|\n)+" + words[0].strip()
+            match = re.search(pattern, text)
 
-        find_pos = None
-        for match in matches:
+        # find_pos = None\
+        if match:
             find_pos = match.span(0)
-            break
-        if find_pos is None:
-            continue
-        else:
+        #     break
+        # if find_pos is None:
+        #     continue
+        # else:
             sections_title.append(title)
             sections_pos.append(find_pos)
 
@@ -332,8 +344,8 @@ def find_section_titles(text, title_list):
     total_seg = len(sections_pos)
     for i in range(total_seg):
         text_start_pos = sections_pos[i][1] + 1
-        if i == 0 and sections_pos[i][0] > 0:
-            sections_text.insert(0, text[:sections_pos[i][0]])
+        if i == 0 and sections_pos[0][0] > 0:
+            sections_text.insert(0, text[:sections_pos[0][0]])
             sections_title.insert(0, "No_title")
 
         if i == total_seg - 1:
@@ -348,6 +360,7 @@ def find_section_titles(text, title_list):
             text_end_pos = sections_pos[i+1][0]
             sections_text.append(text[text_start_pos: text_end_pos])
     
+
     return sections_title, sections_text
 
 # get the first level section titles of table-of-content
@@ -428,14 +441,14 @@ def separate_content(text, table_of_content):
             processed_content.append(record)
             output_json_format["Abstract"]["Text"] = content
             continue
-
-
+        
         sub_titles = get_sub_toc(level1_title, table_of_content)
         level2_titles, level2_texts = find_section_titles(level1_texts[level1_index], sub_titles)
 
         if len(level2_titles) == 0 and len(level2_texts) == 0:
+            
             content = clean_text(level1_texts[level1_index], word_tokenize, lemmatizer, stop_words)
-            level1_title = clean_section_title(level1_title)
+
             record = {"level_1": level1_title, "level_1_content": content}
             processed_content.append(record)
             # json file requires special format
@@ -456,7 +469,6 @@ def separate_content(text, table_of_content):
                     # did not find any sub sections, then just record all the section text
                     if len(level3_titles) == 0 and len(level3_texts) == 0:
                         content = clean_text(level2_texts[level2_index],word_tokenize, lemmatizer, stop_words)
-                        level2_title = clean_section_title(level2_title)
                         record = {"level_1": level1_title, 
                                   "level_2": level2_title,
                                 "level_2_content": content}
@@ -468,7 +480,6 @@ def separate_content(text, table_of_content):
                     else:
                         for level3_index, level3_title in enumerate(level3_titles):
                             content = clean_text(level3_texts[level3_index], word_tokenize, lemmatizer, stop_words)
-                            level3_title = clean_section_title(level3_title)
                             record = {"level_1": level1_title, "level_2": level2_title, 
                                       "level_3": level3_title,
                                     "level_3_content": content}
@@ -483,7 +494,6 @@ def separate_content(text, table_of_content):
                                         output_json_format[level1_title]['Subsections'][k].append({"Section_Num": get_section_num(level3_title), "Section": level3_title, "Text": content, "Groundtruth": ""})
                 else:
                     content = clean_text(level2_texts[level2_index], word_tokenize, lemmatizer, stop_words)
-                    level2_title = clean_section_title(level2_title)
                     record = {"level_1": level1_title, "level_2": level2_title,
                               "level_2_content": content}
                     processed_content.append(record)
