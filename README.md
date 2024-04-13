@@ -25,7 +25,9 @@
 Input: a pdf file's full path.<br> 
 Return: a pyMuPDF file object, the full text of the pdf file, total pages of the pdf<br>
 
-- `processing_pdf.auto_find_toc`<br>
+- ```processing_pdf.auto_find_toc```<br>
+This function will get the PDF file's original table_of_content, do some cleanup to make it more neat. If the original table_of_content is missing, it will use RE mapping method to create one. However, user needs to check if the auto-generated toc is what they want. They could further customize it based on the generated template.
+The purpose to do cleanup on the original toc is that some contain whitespaces (\r, \n, extra \s) making the display ugly.
 Input: the pyMuPDF file object which returns from the above function `processing_pdf.open_file`<br>
 Return: a composite list structure. An example is like this:<br>
 ```
@@ -80,3 +82,4 @@ Return: a composite list structure. An example is like this:<br>
 1. bug fixing based on feedback
 2. Extract tables
 3. Image extraction bug: some overlapping images are extracted into separate files
+4. Further cleanup the Latex formula and diagrams
