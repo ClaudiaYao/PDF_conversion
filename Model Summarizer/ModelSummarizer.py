@@ -47,9 +47,12 @@ class SummarizationModel:
                         attention_mask=attention_mask,
                         labels=labels
                         )
-      loss = self.criterion(outputs.logits.view(-1, outputs.logits.size(-1)), labels.view(-1))
-      
-      return loss,outputs.logits
+      logits = outputs.logits
+      logits_flat = logits.view(-1, logits.size(-1))
+      labels_flat = labels.view(-1)
+      loss = self.criterion(logits_flat, labels_flat)
+          
+      return loss,logits
   
     #Function to calculate ROUGE scores for generated summary and ground truth
     def calculate_rouge_scores(self,generated_summary, ground_truth_summary):
@@ -104,7 +107,7 @@ class SummarizationModel:
           loss.backward()
           self.optimizer.step()
           total_loss += loss.item()
-        return total_loss
+      return total_loss
     
     #Function to evaluate model using val set
     def validate_model(self, val_loader):
