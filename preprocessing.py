@@ -38,8 +38,7 @@ def clean_text(paragraph, tokenizer, lemmatizer, stopwords):
         pos = text.index("REFERENCE")
     if pos > -1:
         text = text[: pos]
-
-    print("ttttt:", text)
+        
     # remove unicode chars
     for pattern, value in unicode_dict.items():
         text = re.sub(pattern, value, text) 
