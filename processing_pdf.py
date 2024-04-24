@@ -8,7 +8,79 @@ import string
 import pandas as pd
 import fitz
 import json
-import preprocessing
+
+unicode_dict = {"\\\\N{ASTERISK OPERATOR}": "",
+                "\\\\N{DAGGER}": "", 
+                "\\\\N{ASTERISK OPERATOR}": "*",
+                "\\\\N{LATIN SMALL LIGATURE FI}": "fi",
+                "\\\\N{LATIN SMALL LIGATURE FL}": "fl",
+                "\\\\N{RIGHT SINGLE QUOTATION MARK}": "'",
+                "\\\\N{MULTIPLICATION SIGN}": "*",
+                "\\\\N{LEFT DOUBLE QUOTATION MARK}": '"',
+                "\\\\N{RIGHT DOUBLE QUOTATION MARK}": '"',
+                "\\\\N{EN DASH}": "-",
+                "\\\\N{ELEMENT OF}": "belong to ",
+                "\\\\N{MULTIPLICATION SIGN}": "*",
+                "\\\\N{GREEK SMALL LETTER BETA}": "beta",
+                "\\\\N{PLUS-MINUS SIGN}": "+",
+                "\\\\N{PLUS-MINUS SIGN}": "+/-",
+                "\\\\N{MINUS SIGN}": "-",
+                "\\\\N{ACUTE ACCENT}": ""
+                }
+
+
+def clean_text(paragraph, tokenizer, lemmatizer, stopwords):
+    text = str(paragraph.strip().encode("ascii", errors="namereplace"))
+    # convert byte format to string, there is an extra chars b' at beginning and there is ' at the end. Remove them
+    if text.find("b'") == 0:
+        text = text [2:]
+    if text[-1] == "'":
+        text = text [:-1]
+    # remove any references section in case Reference is not found in previous steps
+    pos = -1
+    if "Reference" in text:
+        pos = text.index("Reference")
+    elif "REFERENCE" in text:
+        pos = text.index("REFERENCE")
+    if pos > -1:
+        text = text[: pos]
+
+    # remove unicode chars
+    for pattern, value in unicode_dict.items():
+        text = re.sub(pattern, value, text) 
+   
+    text = text.lower()
+    text = re.sub(r"-\\n", "", text)
+    text = re.sub(r"\\n", " ", text)
+    text = re.sub(r"\\r", ' ', text)
+    text = re.sub(r"\\", '', text)
+    text = re.sub(r'\"', "", text)
+
+    text = re.sub(r"([,;.])+","\g<1>", text)    # remove duplicate punct when some chars are removed
+    text = re.sub(r"\[.+?\]", "", text)  # Remove [+XYZ chars] in content
+    text = re.sub(r"\(.+?\)", "", text) 
+    text = re.sub(r"@math\d+", "", text)
+    text = re.sub(r"\bhttps*://.+@*.+\s", "", text)
+    text = re.sub(r"\.\.\.", "", text)
+    text = re.sub(r"\s+", " ", text)  # Remove multiple spaces in content
+    text = text.strip()
+
+    # optional processing
+    # text = re.sub(r"[0-9]+\.*[0-9]*", "", text) # remove the words with digits
+    # text = re.sub(r"(?<=\w)-\s*(?=\w)", "", text)  # Replace dash between words
+    # text = re.sub(
+    #     f"[{re.escape(string.punctuation)}]", "", text)  # Remove punctuation
+
+    # tokens = tokenizer(text)
+    # processed_text = ""
+    # for token in tokens:
+    #     if token in stopwords or token.isdigit() or len(token) == 1:
+    #         continue 
+    #     else:
+    #         processed_text = processed_text + " " + lemmatizer.lemmatize(token)
+    # return ' '.join(tokens)
+    return text
+
 
 def save_dataframe(df, df_meta, json_dict, save_folder, file_name):
     full_name = save_folder + "/" + file_name + ".csv"
@@ -403,7 +475,7 @@ def separate_content(text, table_of_content):
             continue
 
         if level1_index == 0 and level1_title == "No_title":
-            content = preprocessing.clean_text(level1_texts[0], word_tokenize, lemmatizer, stop_words)
+            content = clean_text(level1_texts[0], word_tokenize, lemmatizer, stop_words)
             record = {"level_1": "Abstract", "level_1_content": content}
             processed_content.append(record)
             output_json_format["Abstract"]["Text"] = content
@@ -413,7 +485,7 @@ def separate_content(text, table_of_content):
         level2_titles, level2_texts = find_section_titles(level1_texts[level1_index], sub_titles)
 
         if len(level2_titles) == 0 and len(level2_texts) == 0:
-            content = preprocessing.clean_text(level1_texts[level1_index], word_tokenize, lemmatizer, stop_words)
+            content = clean_text(level1_texts[level1_index], word_tokenize, lemmatizer, stop_words)
 
             record = {"level_1": level1_title, "level_1_content": content}
             processed_content.append(record)
@@ -424,7 +496,7 @@ def separate_content(text, table_of_content):
             for level2_index, level2_title in enumerate(level2_titles):
                 # this operation will put the abstract at the end of the
                 if level2_index == 0 and level2_title == "No_title":
-                    output_json_format[level1_title]['Text'] = preprocessing.clean_text(level2_texts[0],word_tokenize, lemmatizer, stop_words)
+                    output_json_format[level1_title]['Text'] = clean_text(level2_texts[0],word_tokenize, lemmatizer, stop_words)
                     continue
 
                 sub_titles = get_sub_toc(level2_title, table_of_content)
@@ -434,7 +506,7 @@ def separate_content(text, table_of_content):
 
                     # did not find any sub sections, then just record all the section text
                     if len(level3_titles) == 0 and len(level3_texts) == 0:
-                        content = preprocessing.clean_text(level2_texts[level2_index],word_tokenize, lemmatizer, stop_words)
+                        content = clean_text(level2_texts[level2_index],word_tokenize, lemmatizer, stop_words)
                         record = {"level_1": level1_title, 
                                   "level_2": level2_title,
                                 "level_2_content": content}
@@ -445,7 +517,7 @@ def separate_content(text, table_of_content):
                         
                     else:
                         for level3_index, level3_title in enumerate(level3_titles):
-                            content = preprocessing.clean_text(level3_texts[level3_index], word_tokenize, lemmatizer, stop_words)
+                            content = clean_text(level3_texts[level3_index], word_tokenize, lemmatizer, stop_words)
                             record = {"level_1": level1_title, "level_2": level2_title, 
                                       "level_3": level3_title,
                                     "level_3_content": content}
@@ -459,7 +531,7 @@ def separate_content(text, table_of_content):
                                     else:
                                         output_json_format[level1_title]['Subsections'][k].append({"Section_Num": get_section_num(level3_title), "Section": level3_title, "Text": content, "Groundtruth": ""})
                 else:
-                    content = preprocessing.clean_text(level2_texts[level2_index], word_tokenize, lemmatizer, stop_words)
+                    content = clean_text(level2_texts[level2_index], word_tokenize, lemmatizer, stop_words)
                     record = {"level_1": level1_title, "level_2": level2_title,
                               "level_2_content": content}
                     processed_content.append(record)
