@@ -25,24 +25,23 @@ def load_data(file_path):
 
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')    
 #Define the Model
-class SummarizationModel:  
-    DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')    
-
+class SummarizationModel(nn.Module):  
 
     def __init__(self, model_name):
-        self.model_name = model_name
-        self.tokenizer = LEDTokenizer.from_pretrained(model_name)
-        self.model = LEDForConditionalGeneration.from_pretrained(model_name).to(DEVICE)
-        self.config= LEDForConditionalGeneration.from_pretrained(model_name).config
-        self.optimizer = torch.optim.AdamW(self.model.parameters(), lr=2e-5, weight_decay=0.01)
-        self.criterion = torch.nn.CrossEntropyLoss()        
+      super().__init__()
+      self.model_name = model_name
+      self.tokenizer = LEDTokenizer.from_pretrained(model_name)
+      self.model = LEDForConditionalGeneration.from_pretrained(model_name).to(DEVICE)
+      self.config= LEDForConditionalGeneration.from_pretrained(model_name).config
+      self.optimizer = torch.optim.AdamW(self.model.parameters(), lr=2e-5, weight_decay=0.01)
+      self.criterion = torch.nn.CrossEntropyLoss()        
 
 
     #Forward Method
     def forward(self, input_ids, attention_mask, labels):
-      input_ids = input_ids.to(self.DEVICE)
-      attention_mask = attention_mask.to(self.DEVICE)
-      labels = labels.to(self.DEVICE) 
+      input_ids = input_ids.to(DEVICE)
+      attention_mask = attention_mask.to(DEVICE)
+      labels = labels.to(DEVICE) 
       outputs = self.model(input_ids=input_ids,
                         attention_mask=attention_mask,
                         labels=labels
@@ -86,7 +85,7 @@ class SummarizationModel:
          # Process the subsections if they exist
         if "Subsections" in section:
               for subsection in section["Subsections"]:
-                  model_summarizer.Tokenize_sections(self,subsection, results)
+                  model_summarizer.Tokenize_sections(subsection, results)
         return results  
   
     
@@ -157,9 +156,9 @@ class SummarizationModel:
         inputs = self.tokenizer(content, return_tensors="pt", max_length=seq_length, truncation=True)
         labels = self.tokenizer(ground_truth_summary, return_tensors="pt", max_length=seq_length, truncation=True)["input_ids"]
 
-        input_ids = inputs["input_ids"].to(self.DEVICE)
-        attention_mask = inputs["attention_mask"].to(self.DEVICE)
-        labels = labels.to(self.DEVICE)
+        input_ids = inputs["input_ids"].to(DEVICE)
+        attention_mask = inputs["attention_mask"].to(DEVICE)
+        labels = labels.to(DEVICE)
         with torch.no_grad():
           outputs = self.model(input_ids=input_ids,
                         attention_mask=attention_mask,
@@ -197,7 +196,7 @@ class SummarizationModel:
     
     def log_metrics(self,epoch, train_loss, val_loss, rouge_scores):
       log_file = "logs/metrics_log.txt"
-      with open(log_file, "a") as f:        
+      with open(log_file, "a+") as f:        
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         log_str = f"{timestamp}, Epoch {epoch + 1}, Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}, ROUGE: {rouge_scores}\n"
         f.write(log_str)
@@ -239,7 +238,7 @@ class SummarizationModel:
         for section in pdf_data:
             model_summarizer.process_section(section,all_results,modelsummarizer)
         
-        with open(output_file, "w") as json_file:
+        with open(output_file, "w+") as json_file:
             json.dump(all_results, json_file, indent=4)    
         
     
