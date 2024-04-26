@@ -1,12 +1,13 @@
 import json
 import os
+import pandas as pd
 from transformers import BartForConditionalGeneration, BartTokenizer, LEDForConditionalGeneration, LEDTokenizer, Seq2SeqTrainingArguments, Seq2SeqTrainer
-from datasets import load_dataset
+from datasets import load_dataset, Dataset
 from rouge_score import rouge_scorer
 import torch
 import textwrap
 
-MAX_LENGTH = 240
+MAX_LENGTH = 244
 
 
 def get_model(model_name):
@@ -17,6 +18,21 @@ def get_model(model_name):
 def load_data(file_path, split):
 	data = load_dataset('json', data_files=file_path, split=split)
 	return data
+
+def load_data_from_json(file_path):
+	json_data = load_json(file_path)
+
+	def flatten_subsections(sections):
+		results = []
+		for section in sections:
+			results.append(section)
+			results += flatten_subsections(section["Subsections"])
+		return results
+	
+	flattened_json_data = flatten_subsections(json_data)
+
+	return Dataset.from_list(flattened_json_data)
+				
 
 def load_json(file_path):
     with open(file_path, 'r',encoding='utf-8') as file:
@@ -75,14 +91,23 @@ def train_model(model_name):
 
 	massage_data = get_data_massager(tokenizer)
 
-	train_data = load_data(
+	# train_data = load_data(
+	# 	os.path.join('..', 'dataset', 'dataset_ground_truth.json'),  # 100 pdfs
+	# 	split='train',
+	# )
+	# train_data = train_data.map(massage_data, batched=True)
+	# val_data = load_data(
+	# 	os.path.join('..', 'dataset', 'dataset_eval_ground_truth.json'),  #20 pdfs
+	# 	split='train',
+	# )
+	# val_data = val_data.map(massage_data, batched=True)
+
+	train_data = load_data_from_json(
 		os.path.join('..', 'dataset', 'dataset_ground_truth.json'),  # 100 pdfs
-		split='train',
 	)
 	train_data = train_data.map(massage_data, batched=True)
-	val_data = load_data(
+	val_data = load_data_from_json(
 		os.path.join('..', 'dataset', 'dataset_eval_ground_truth.json'),  #20 pdfs
-		split='train',
 	)
 	val_data = val_data.map(massage_data, batched=True)
 
