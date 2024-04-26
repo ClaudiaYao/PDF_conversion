@@ -219,7 +219,7 @@ class SummarizationModel(nn.Module):
         section_summary_results = {}
         content = section["Text"]
         section_name=section["Section"]
-        summary_text = model_summarizer.generate_summary(modelsummarizer,content)
+        summary_text = model_summarizer.generate_summary(content)
         section_summary_results["Section Name"] = section_name
         section_summary_results["Generated Summary"] = summary_text
         results.append(section_summary_results)
@@ -233,7 +233,7 @@ class SummarizationModel(nn.Module):
             
              
     # Summarize the section contents and subsection contents
-    def summarize_pdf(pdf_data, output_file,modelsummarizer):
+    def summarize_pdf(self, pdf_data, output_file,modelsummarizer):
         all_results = []
         for section in pdf_data:
             model_summarizer.process_section(section,all_results,modelsummarizer)
