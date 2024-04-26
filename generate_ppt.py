@@ -60,7 +60,7 @@ def get_meta(article_name):
 
     return paper_title, abstract
 
-def get_section_text(section):
+def get_section_groundtruth(section):
     section_summary = ""
     name = section['Section']
     text = section['Text']
@@ -74,7 +74,33 @@ def get_section_text(section):
     
     if subsections:
         for subsection in subsections:
-            section_summary += get_section_text(subsection)
+            section_summary += get_section_groundtruth(subsection)
+
+    return section_summary
+
+def get_section_summary(section):
+    with open(f'model_summarizer/results/model-summary_results.json', encoding='utf-8') as f:
+        data = json.load(f)
+    def build_dict(seq, key):
+        return dict((d[key], dict(d, index=index)) for (index, d) in enumerate(seq))
+
+    summary_by_section_name = build_dict(data, key="Section Name")
+    section_summary = ""
+    name = section['Section']
+    text = section['Text']
+    subsections = section['Subsections']
+    if name not in summary_by_section_name:
+        return ""
+    summary = summary_by_section_name.get(name)["Generated Summary"]
+
+    if name != "NA":
+        section_summary += name + '\n'
+    if summary:
+        section_summary += summary + '\n'
+    
+    if subsections:
+        for subsection in subsections:
+            section_summary += get_section_summary(subsection)
 
     return section_summary
 
