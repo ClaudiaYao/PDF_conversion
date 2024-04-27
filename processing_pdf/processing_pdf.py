@@ -59,7 +59,7 @@ def clean_text(paragraph, tokenizer, lemmatizer, stopwords):
     text = re.sub(r"([,;.])+","\g<1>", text)    # remove duplicate punct when some chars are removed
     text = re.sub(r"\[.+?\]", "", text)  # Remove [+XYZ chars] in content
     text = re.sub(r"\(.+?\)", "", text) 
-    text = re.sub(r"@math\d+", "", text)
+    text = re.sub(r"@xmath\d+", "", text)
     text = re.sub(r"\bhttps*://.+@*.+\s", "", text)
     text = re.sub(r"\.\.\.", "", text)
     text = re.sub(r"\s+", " ", text)  # Remove multiple spaces in content
@@ -100,6 +100,7 @@ def save_dataframe(df, df_meta, json_dict, save_folder, file_name):
 
 def open_file(pdf_file):
     try:
+        print(pdf_file)
         fitz.TOOLS.mupdf_warnings()  # empty the problem message container
         doc = fitz.open(pdf_file)
         warnings = fitz.TOOLS.mupdf_warnings()
