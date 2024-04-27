@@ -4,11 +4,15 @@ import json
 import os
 from datetime import datetime
 import torch.optim as optim
+from torch.optim import lr_scheduler
+from torch.optim.lr_scheduler import StepLR,CosineAnnealingLR
 import torch.nn as nn
 from torch.utils.data import DataLoader
 import logging
 transformers_logger = logging.getLogger("transformers")
 logging.getLogger("transformers").setLevel(logging.ERROR)
+logging.disable(logging.INFO) # disable INFO and DEBUG logging everywhere
+logging.disable(logging.WARNING) 
 from transformers import LEDForConditionalGeneration, LEDTokenizer
 from datasets import load_dataset, load_metric
 import torch
@@ -25,24 +29,25 @@ def load_data(file_path):
 
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')    
 #Define the Model
-class SummarizationModel:  
-    DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')    
-
+class SummarizationModel(nn.Module):  
 
     def __init__(self, model_name):
-        self.model_name = model_name
-        self.tokenizer = LEDTokenizer.from_pretrained(model_name)
-        self.model = LEDForConditionalGeneration.from_pretrained(model_name).to(DEVICE)
-        self.config= LEDForConditionalGeneration.from_pretrained(model_name).config
-        self.optimizer = torch.optim.AdamW(self.model.parameters(), lr=2e-5, weight_decay=0.01)
-        self.criterion = torch.nn.CrossEntropyLoss()        
+      super().__init__()
+      self.model_name = model_name
+      self.tokenizer = LEDTokenizer.from_pretrained(model_name)
+      self.model = LEDForConditionalGeneration.from_pretrained(model_name).to(DEVICE)
+      self.config= LEDForConditionalGeneration.from_pretrained(model_name).config
+      self.optimizer = torch.optim.AdamW(self.model.parameters(), lr=1e-5, weight_decay=0.01)
+      #self.scheduler = lr_scheduler.ReduceLROnPlateau(self.optimizer, mode='min', factor=0.1, patience=3, verbose=True)
+      self.scheduler = CosineAnnealingLR(self.optimizer, no_epochs=10)
+      self.criterion = torch.nn.CrossEntropyLoss()        
 
 
     #Forward Method
     def forward(self, input_ids, attention_mask, labels):
-      input_ids = input_ids.to(self.DEVICE)
-      attention_mask = attention_mask.to(self.DEVICE)
-      labels = labels.to(self.DEVICE) 
+      input_ids = input_ids.to(DEVICE)
+      attention_mask = attention_mask.to(DEVICE)
+      labels = labels.to(DEVICE) 
       outputs = self.model(input_ids=input_ids,
                         attention_mask=attention_mask,
                         labels=labels
@@ -59,13 +64,13 @@ class SummarizationModel:
         
       scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
       scores = scorer.score(generated_summary, ground_truth_summary)
-      rouge1_f1 = scores['rouge1'].fmeasure
-      rouge2_f1 = scores['rouge2'].fmeasure
-      rougeL_f1 = scores['rougeL'].fmeasure
+      rouge1_f1 = scores['rouge1'].fmeasure * 100
+      rouge2_f1 = scores['rouge2'].fmeasure * 100
+      rougeL_f1 = scores['rougeL'].fmeasure * 100
       return rouge1_f1, rouge2_f1, rougeL_f1
     
       # Function to tokenize sections before training the model
-    def Tokenize_sections(self,section,results):
+    def  pre_process_data(self,section,results):
         # List to include all the sections, content and subsections and Subsection content
         summary_results = {}
         section_results = []
@@ -86,16 +91,17 @@ class SummarizationModel:
          # Process the subsections if they exist
         if "Subsections" in section:
               for subsection in section["Subsections"]:
-                  model_summarizer.Tokenize_sections(self,subsection, results)
+                  model_summarizer.pre_process_data(subsection, results)
         return results  
   
     
     # Function to train model
     def train_model(self,train_loader):
+      self.model.train()
       total_loss = 0.0  # Initialize total loss
       for data in train_loader:
         results = []
-        model_summarizer.Tokenize_sections(data, results)
+        model_summarizer.pre_process_data(data, results)
         for result in results:
           inputs = result["input_ids"]
           attention_mask = result["attention_mask"]
@@ -111,6 +117,7 @@ class SummarizationModel:
     
     #Function to evaluate model using val set
     def validate_model(self, val_loader):
+      self.model.eval()
       val_loss=0.0
       total_rouge1_f1 = 0.0
       total_rouge2_f1 = 0.0
@@ -119,7 +126,7 @@ class SummarizationModel:
       with torch.no_grad():
         for val_data in val_loader:
           val_results = []
-          model_summarizer.Tokenize_sections(val_data, val_results)
+          model_summarizer.pre_process_data(val_data, val_results)
           for val_result in val_results:
             input_ids = val_result["input_ids"]
             attention_mask = val_result["attention_mask"]
@@ -146,7 +153,7 @@ class SummarizationModel:
     
     #Function to test the model using test dataset
     def test_model(self,section, model):
-        
+      self.model.eval() 
       section_summary_results = {}
       content = section["Text"]
       section_name = section["Section"]
@@ -157,22 +164,25 @@ class SummarizationModel:
         inputs = self.tokenizer(content, return_tensors="pt", max_length=seq_length, truncation=True)
         labels = self.tokenizer(ground_truth_summary, return_tensors="pt", max_length=seq_length, truncation=True)["input_ids"]
 
-        input_ids = inputs["input_ids"].to(self.DEVICE)
-        attention_mask = inputs["attention_mask"].to(self.DEVICE)
-        labels = labels.to(self.DEVICE)
+        input_ids = inputs["input_ids"].to(DEVICE)
+        attention_mask = inputs["attention_mask"].to(DEVICE)
+        global_attention_mask = torch.zeros_like(input_ids)
+        global_attention_mask[:, 0] = 1
+        labels = labels.to(DEVICE)
         with torch.no_grad():
-          outputs = self.model(input_ids=input_ids,
-                        attention_mask=attention_mask,
-                        labels=labels)
-
-          logits = outputs.logits
-          # Apply softmax to convert logits to probabilities
-          probs = torch.softmax(logits[0], dim=-1)          
-          generated_ids = torch.argmax(probs, dim=-1)
+          outputs = model.generate(input_ids, 
+                                   attention_mask=attention_mask, 
+                                   global_attention_mask=global_attention_mask, 
+                                   max_length=seq_length, 
+                                   num_beams=4,
+                                   no_repeat_ngram_size=3,
+                                   early_stopping=True, 
+                                   num_return_sequences=1
+                                   )              
 
           # Decode the generated summary using the tokenizer
-          summary_text = self.tokenizer.decode(generated_ids, skip_special_tokens=True)
-          ground_truth_summary = tokenizer.decode(labels[0], skip_special_tokens=True)
+          summary_text = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)
+          ground_truth_summary = self.tokenizer.batch_decode(labels, skip_special_tokens=True)
 
             # Calculate ROUGE scores
           rouge1_f1, rouge2_f1, rougeL_f1 = model_summarizer.calculate_rouge_scores(summary_text, ground_truth_summary)
@@ -194,10 +204,10 @@ class SummarizationModel:
       return section_summary_results
 
     
-    
+    #Function to log the experiment results
     def log_metrics(self,epoch, train_loss, val_loss, rouge_scores):
       log_file = "logs/metrics_log.txt"
-      with open(log_file, "a") as f:        
+      with open(log_file, "a+") as f:        
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         log_str = f"{timestamp}, Epoch {epoch + 1}, Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}, ROUGE: {rouge_scores}\n"
         f.write(log_str)
@@ -220,7 +230,7 @@ class SummarizationModel:
         section_summary_results = {}
         content = section["Text"]
         section_name=section["Section"]
-        summary_text = model_summarizer.generate_summary(modelsummarizer,content)
+        summary_text = model_summarizer.generate_summary(content)
         section_summary_results["Section Name"] = section_name
         section_summary_results["Generated Summary"] = summary_text
         results.append(section_summary_results)
@@ -234,12 +244,12 @@ class SummarizationModel:
             
              
     # Summarize the section contents and subsection contents
-    def summarize_pdf(pdf_data, output_file,modelsummarizer):
+    def summarize_pdf(self, pdf_data, output_file,modelsummarizer):
         all_results = []
         for section in pdf_data:
             model_summarizer.process_section(section,all_results,modelsummarizer)
         
-        with open(output_file, "w") as json_file:
+        with open(output_file, "w+") as json_file:
             json.dump(all_results, json_file, indent=4)    
         
     
