@@ -67,27 +67,23 @@ def get_data_massager(tokenizer):
 		}
 	return preprocess_function
 
-def get_training_args():
+def get_training_args(
+		num_epochs,
+):
 	return Seq2SeqTrainingArguments(
 		output_dir='./Checkpoints',
-		num_train_epochs=1,
+		num_train_epochs=num_epochs,
 		per_device_train_batch_size=8,
 		save_strategy='epoch',
 		lr_scheduler_type='linear',
-		warmup_steps=500,
 		adam_beta1=0.9,
 		adam_beta2=0.999,
 		adam_epsilon=1e-8,
-		label_smoothing_factor=0.1,
-		predict_with_generate=True,
-		learning_rate=5e-5,
-		fp16=True,
-		gradient_accumulation_steps=16, 
 	)
 
-def train_model(model_name):
+def train_model(model_name, num_epochs):
 	model, tokenizer = get_model(model_name)
-	training_args = get_training_args()
+	training_args = get_training_args(num_epochs=num_epochs)
 
 	massage_data = get_data_massager(tokenizer)
 
@@ -111,19 +107,29 @@ def train_model(model_name):
 	)
 	val_data = val_data.map(massage_data, batched=True)
 
+	# def compute_metrics(results):
+	# 	pred, labels = results
+	# 	rouge1, rouge2, rougeL= calculate_rouge_scores(pred, labels)
+	# 	return {
+	# 		"rouge-1": rouge1,
+	# 		"rouge-2": rouge2,
+	# 		"rouge-l": rougeL,
+	# 	}
+
 	trainer = Seq2SeqTrainer(
 		model=model,
 		tokenizer=tokenizer,
 		args=training_args,
 		train_dataset=train_data,
 		eval_dataset=val_data,
+		# compute_metrics=compute_metrics,
 	)
 	trainer.train()
 	metrics = trainer.evaluate()
 	print(metrics)
 	# print("Evaluation Loss:", metrics["loss"])
 	# print("Rouge Score:", metrics["rouge1"])
-	return model, tokenizer
+	return model, tokenizer, metrics
 
 DEVICE = 'cuda'
 

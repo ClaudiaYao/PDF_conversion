@@ -1,0 +1,867 @@
+[
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": " textkey-higson bijection is a one-to-one correspondence between irreducible tempered representations of a group reductive group and irreducible unitary representations of the cartan motion group. The correspondence discusses known facts about the topology of the tempered dual e the unitary dual, the mac bi, It confirms that the mackey-higson bijection is these tempered groups is continuous.",
+        "ROUGE-1 F1": 0.7500000000000001,
+        "ROUGE-2 F1": 0.576271186440678,
+        "ROUGE-L F1": 0.7
+    },
+    {
+        "Section Name": [
+            "1. Introduction"
+        ],
+        "Generated Summary": " text discusses the existencekey-Higson bijection between e tempered dual of unitary dual of a connected reductive algebraic group. a finite plane r The research has shown that natural-to-one correspondence between these groupss, which the for representation theory. group theory-algebras. The existencejection is which not a haomorphism, is implications implicationsological implications and is to the studyumgartSchnes theoremHahnseov biomorphism. The text of the bijection is discussed, with the importanceological importance and implications to the-utative groups. The text also to thei groupss and the relationsification, on the-,values operators, highlighting theures and the relationsic structures nonological relations. The text concludes on the construction dual of of to their importance of the group topology, themissible duals,",
+        "ROUGE-1 F1": 0.5822784810126582,
+        "ROUGE-2 F1": 0.27234042553191484,
+        "ROUGE-L F1": 0.4894514767932489
+    },
+    {
+        "Section Name": [
+            "2. Topology of the tempered dual"
+        ],
+        "Generated Summary": " text discusses the Harological of the category version of the group reductive algebraic group. a finite field. It presents the conceptish-Chandra decomposition of the direct of continuous representations of The presents the presentationposition of the representations of a of is groups of The presentation also introduces the presentation of theets of the category dual of the a of proofs related to thereducible representations representations. the properties bounds-order. The, it introduces a on the group of the in the category dual of The",
+        "ROUGE-1 F1": 0.4790419161676646,
+        "ROUGE-2 F1": 0.18181818181818182,
+        "ROUGE-L F1": 0.4311377245508982
+    },
+    {
+        "Section Name": [
+            "3. Topology of the motion group dual and remarks on the Mackey-Higson bijection"
+        ],
+        "Generated Summary": "itary irreducible representations of the motion group g mackey parameters for which two Mackey-Hson bijection is them to The textjection is : e g c e g is defineduous, the is e are representedomorphic. Theleyt's the Macology of the g and with that thekey parameters are to theable of the g. The section of the bijection is shown by the theorem method of operators. thegroups and sub. Thegett concludes theorem is to the new general framework, highlighting a into the points and the context of the unitideirected of",
+        "ROUGE-1 F1": 0.4858757062146893,
+        "ROUGE-2 F1": 0.18285714285714288,
+        "ROUGE-L F1": 0.4067796610169492
+    },
+    {
+        "Section Name": [
+            "4. Continuity of the Mackey-Higson bijection"
+        ],
+        "Generated Summary": " text discusses the existence of bi bipher biSchhest bijection m which that if bijection m continuous continuous. considering that there elements element of e group component of a groups maps there n subsequ of ir ofges to a, there there exists a subsequence of image under m bijection is admitsges to The proof alsoves into the settingctive side of prelim resultsations and considering of parabolic subgroups, discrete series representations, and thekey-. The concludes del on the constructionatum of the commyl group, showingizing, and--group, and thebi theleyt's theorem for continuous existence of the bikey-Higson bijection. text involves proving proofsmmaas and proofs, demonstrate the existence of of the bijection.",
+        "ROUGE-1 F1": 0.5201793721973095,
+        "ROUGE-2 F1": 0.18099547511312214,
+        "ROUGE-L F1": 0.43049327354260086
+    },
+    {},
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": " text establishesves into foundational foundational of poincar\u00e9 spacesity and establishing foundational results that poincar\u00e9 spaces that applications applications. It, it exists a finite of an old conjecture regarding proving.T. Witt. Walls in The, a text establishes that existence of finite finite CW pair satisfying relative Poincar\u00e9 duality in dimension n with with another proving that relative to poincar\u00e9 duality for a cases. The, it relative version of a result by Gottlieb is poincar\u00e9 duality and br-ations is proven,",
+        "ROUGE-1 F1": 0.6496815286624203,
+        "ROUGE-2 F1": 0.3612903225806452,
+        "ROUGE-L F1": 0.5732484076433121
+    },
+    {},
+    {},
+    {
+        "Section Name": [
+            "3. The Thom Isomorphism"
+        ],
+        "Generated Summary": " textistakism of the dual of dualincar\u00e9 duality. theic geometryology.",
+        "ROUGE-1 F1": 0.28571428571428575,
+        "ROUGE-2 F1": 0.0,
+        "ROUGE-L F1": 0.28571428571428575
+    },
+    {},
+    {},
+    {},
+    {},
+    {
+        "Section Name": [
+            "8. Historical Remarks"
+        ],
+        "Generated Summary": " text textarks section discusses the concepts of aincar E dual, are been used in surgery surgery for Billder introduced the first definition most definition, while is well for simply connected surgery. inadequate for the general cases. Sp introduced a def of poincar\u00e9 pairs that controls both the and boundary su. Sp definition, introduced by Spivak, which is suitable for the absolute setting but not sufficientfficiency for surgery in po case of poincar\u00e9 pairs. The text conclude the section acknowledge aore definition for is theuities in different different definitions. The text concludes discusses the existence of propertiesomorphism of of theincar\u00e9 pairs, highlighting concludes concludes the importance in challengesleties in the the class these in to Poincar\u00e9 pairs. text conclude the importance of further concepts in the context of the applications.. Poolds and manif topics.",
+        "ROUGE-1 F1": 0.551470588235294,
+        "ROUGE-2 F1": 0.2814814814814815,
+        "ROUGE-L F1": 0.47058823529411764
+    },
+    {},
+    {},
+    {},
+    {},
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": "renkov light imaging in a in astroparticle physics to detect and measure extraterrestrial particles on Earth. Various research involves using use of fastrenkov light induced by fast charged particles in transparent die such air or water. Various detection techniques are explored, detection, with breakthrough study discusses the detection principles and experiments breakthrough that with breakthrough breakthrough results. Future developments are the field are highlighted highlighted. including research focus on theroparticle physics and cherenkov detectors, neutrino telescopes, gamma-ray telescopes, and cosmic-ray detectors.",
+        "ROUGE-1 F1": 0.7228915662650603,
+        "ROUGE-2 F1": 0.4268292682926829,
+        "ROUGE-L F1": 0.6626506024096386
+    },
+    {
+        "Section Name": [
+            "1 Introduction"
+        ],
+        "Generated Summary": " text of the award Prize in to Pavel Arenkov is Ia Mikhail, and Igor Yamm for their discoveryrenkov effect is beingated. its impact impact on astroparticle physics. Cherenkov detection techniques were been crucial for the highrino oscillations and establishing-energy cosmic neutrinos, and-based gamma-ray astronomy, and cosmic in cosmic-ray physics. The study angle of intensity of Cherenkov radiation are governed by the refractive index and with velocity, and the Frank-Tamm formula. Theing have theseoreultiplier tubes and high photoreultipliers have highostconds- have a crucial role in detecting therenkov effects. detect the velories. detect their vel.ing and cosmic radiation is crucial for but the between other detectors like this and is crucial. research of detectorsrenkov radiation are variousroparticle physics are conducted, including the and on applications results.",
+        "ROUGE-1 F1": 0.5551330798479087,
+        "ROUGE-2 F1": 0.2758620689655172,
+        "ROUGE-L F1": 0.47148288973384034
+    },
+    {
+        "Section Name": [
+            "2 Ground-based gamma-ray detectors"
+        ],
+        "Generated Summary": "ma-ray observations are only for satellite ground to study x-ray below g energies. are be be observed by satellite experiments. to their collection. These-based observations cover the air cherenkov telescopes require clear, pref nights and sites alt with detect light pollution. Satellite instruments cover a lower field of view and are detect gamma-ray at high sensitivity. Timing arrays at higher altitudes can directly directly the-induced inducedinduced particle cascadeades. with a significant fraction of the sky. with inferior sensitivity at higher energies. to irenkov telescopes.",
+        "ROUGE-1 F1": 0.6043956043956045,
+        "ROUGE-2 F1": 0.2666666666666666,
+        "ROUGE-L F1": 0.5274725274725275
+    },
+    {
+        "Section Name": [
+            "3 Neutrino telescopes"
+        ],
+        "Generated Summary": "NeNeutrinos telescopes are che Che of cherenkov light from by charged secondary particles emerging from neutrino reactions. detect longrinos. which are good to detect due to their small interaction cross section. Ne telescopes use use of detectors in with transparent dieleric medium and reflect with multipomultipleiers tubes (PMTs). For-energy detectors are installed in deep-underground caverns, PMTs covering a large percentage of the detector. while high-energy detectors are three abundant volumes or ice..ed with three-dimensional arrays of pmTs.- emission (iodes (SPSs) are used suitable for neut in neutrino telescopes due to their high noise rates.",
+        "ROUGE-1 F1": 0.7290640394088671,
+        "ROUGE-2 F1": 0.4676616915422886,
+        "ROUGE-L F1": 0.6995073891625616
+    },
+    {
+        "Section Name": [
+            "4 Cosmic-ray and hybrid detectors"
+        ],
+        "Generated Summary": " detector detector infrastructures use Cherenkov detection with other measurement such U lightorescence light, direct particle detection with and radio detection. Hybrid inf infrastructures are target on cosmic rays, with in gamma-ray and/rino measurements. The largest Auger observ in Argentina combines a largest hybrid detector system, combining PM tanks for direct detection detection with Uorescence telescopes for detect the showers. Water wateratory's cosmic rays with the Sun interval the, searches for gamma-rays and neutrinos in the same energy. Theer's a detailed insightss in requires challenges remain the ray and..coming to theer are are theintillator and, detect the detection detection and The improvements are theESSu- Taar aim Che inf systems to enhanced ray detection. work will TST and and and Japan and L- toPL andX are will in ALS- will expected on improving-ray and neut-fast- particles rays, and highrinos.",
+        "ROUGE-1 F1": 0.5154639175257733,
+        "ROUGE-2 F1": 0.2214532871972318,
+        "ROUGE-L F1": 0.41924398625429554
+    },
+    {
+        "Section Name": [
+            "5 Conclusion and Outlook"
+        ],
+        "Generated Summary": "renkov detectors play crucial for gamma-ray, nerino, and cosmic-ray astroparticle physics, enabling breakthrough breakthroughs. advancements for future experiments. References references have studies have theserenkov detectors have such as the-A.M. and. haveS, andMAS, andCube, and others-er,, have a crucial role in understanding theseroparticle physics. The, research in phot detectors like photodaskipliers are enhance to the understanding. understanding. collaborations are crucial for understanding the understanding of the-energy and and the universe,",
+        "ROUGE-1 F1": 0.5194805194805195,
+        "ROUGE-2 F1": 0.1842105263157895,
+        "ROUGE-L F1": 0.4155844155844156
+    },
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": " text discusses the MC algorithms for ranking scores inference from comparison data. The problem of assigning ranking scores to items based on observed comparison data, various such as information search, aggregation opinions,, electronic online learning algorithms. The algorithms is on computing computation-K algorithm, its application, ranking comparisons, choice, and full ranking outcomes. The algorithm algorithms is shown in the efficiency of accuracy accuracy priori accuracy.. ranking parameters. The couplingization of the MC rate of the Bay algorithm are discussed, with the focus algorithm for the the rates The results show the proposed- rate and the Bradley Bradley algorithm. show that improvements compared the Bradley algorithm.",
+        "ROUGE-1 F1": 0.6090909090909091,
+        "ROUGE-2 F1": 0.3486238532110092,
+        "ROUGE-L F1": 0.509090909090909
+    },
+    {
+        "Section Name": [
+            "1 Introduction"
+        ],
+        "Generated Summary": " aggregation is an challenging task in various applications, as recommender systems, information gaming, sport evaluation learning evaluation It goal is to compute ranking scores of items or on observed data that contains partial between This such context, the authors is on analyzing computation of effectiveness of ranking algorithm algorithms with ranking scores in from with accelerated accelerated MC of address this- issues The algorithm also introduces the techniques for ranking scores, including the use-B model's MC, The algorithm of the couplingization of the rates, the algorithms thes, a the performance of the data on on performance rates, The study algorithm MC is promise improvements in performance rates and paper is is usingx and, and the analysis, therices, with a bounds for achieving a results for validate the efficiency of the algorithm algorithm.",
+        "ROUGE-1 F1": 0.5535055350553505,
+        "ROUGE-2 F1": 0.15613382899628253,
+        "ROUGE-L F1": 0.40590405904059046
+    },
+    {
+        "Section Name": [
+            "2 Problem formulation"
+        ],
+        "Generated Summary": " text discusses the Bradley-Ter model of paired comparisons with which each have either with pairs-lose outcomes and The model of outcomes is given by with the convergence is generalized studied by categ literature. The convergence distributions ( convergence convergence are are addressed, with the on the strategies and as the- and Bay descent. Thegence results for the models are discussed, with the importance of using the-order optimization for for The Bay such thex and and discussed discussed, illustrate in the the distribution process. The",
+        "ROUGE-1 F1": 0.49122807017543857,
+        "ROUGE-2 F1": 0.1775147928994083,
+        "ROUGE-L F1": 0.3508771929824562
+    },
+    {
+        "Section Name": [
+            "3 Convergence rates"
+        ],
+        "Generated Summary": " section presents the rates for gradient descent and mm algorithms for paired likelihood ( map likelihood priori estimation for the Br-Ter model of paired comparisons. It convergence theorems are strongly convex and smooth functions are presented, withizing the rates in terms of strong strong and Results results are used used to derive convergence rate bounds for the Bradley-Terry model. extended generalized. including as the Ra-Kupper model of Luce choice model, and Plackett-Lucuce ranking model. Results results provide insights character rates profilesizations for with differences on for the text on The",
+        "ROUGE-1 F1": 0.6739130434782609,
+        "ROUGE-2 F1": 0.4175824175824176,
+        "ROUGE-L F1": 0.6086956521739132
+    },
+    {
+        "Section Name": [
+            "4 Accelerated MAP inference"
+        ],
+        "Generated Summary": " new algorithm algorithm for gradient estimation is presented, this section, incorporating a descent and mm algorithms for The algorithm feature is a transformation transformation transformation in mono of optimization optimization performance along ensuring-order properties of maintained along Theformed versions of gradient descent and mm algorithms are introduced, iter mapping and and The are convergence rate guarantee are discussed, with the need of satisfying transformation f mapping in. The",
+        "ROUGE-1 F1": 0.7299270072992701,
+        "ROUGE-2 F1": 0.3111111111111111,
+        "ROUGE-L F1": 0.5693430656934305
+    },
+    {
+        "Section Name": [
+            "5 Numerical results"
+        ],
+        "Generated Summary": "TheThe section presents evaluation evaluation on convergence times of mm algorithms for different generalized Bradley-Terry models for real-world datasets. The evaluation is to provideically validate table properties. The numerical show that the convergence of the mm algorithm for map likelihood priori mapsML) estimation can be slower than for maximum a (ML) estimation, However accelerated algorithm for map estimation has convergence convergence time as parameter parameter distribution parameters, The accelerated version algorithm is in the section can reduces the time, The code and datasets for reproduicating experiments experiments are available online at:://github.com/gdmmbt/ acceleratedceleratedbradleyterry.",
+        "ROUGE-1 F1": 0.7692307692307693,
+        "ROUGE-2 F1": 0.48704663212435234,
+        "ROUGE-L F1": 0.7076923076923078
+    },
+    {
+        "Section Name": [
+            "6 Further discussion"
+        ],
+        "Generated Summary": " generalized Bradley-Ter models, gradient gradient descent and mm algorithms for the number estimationML) estimation have linear convergence with a convergence time bound. o/1). where d is the maximum number of observed comparisons per item and a is the algebraic connect of the matrix m of observed counts-pair co-occurrences. The convergence time for gradient estimation algorithms also linear, tight a tight bound. O(art{a). The slow algorithm algorithm for ranking estimation involves this convergence issues for with a into the the comparisons counts can the map time. The proposed time for shown by the such and a for with d n being linear best convergence. Theized optimizationrices are aoulli- functions are used shown, showing the convergence time shown by a tight of the matrix matrix. generalized estimation, generalized descent and mm algorithms with the convergence time is is O(sq)),),n(d), indicating the convergence shown tight(n* for the parameter graph.",
+        "ROUGE-1 F1": 0.7044025157232704,
+        "ROUGE-2 F1": 0.3924050632911393,
+        "ROUGE-L F1": 0.5786163522012578
+    },
+    {
+        "Section Name": [
+            "7 Proofs and Additional Results"
+        ],
+        "Generated Summary": "TheThe text discusses a proof of a theorem regarding to gradient descent iter for It proof involves that if x conditions are met, the algorithm f is be optimized as terms of smooth smoot descent smoot. The section involves a - of f is smooth on smooth the specific inequality. The taking the integer condition for the parameter, the algorithm result can proven.",
+        "ROUGE-1 F1": 0.5645161290322581,
+        "ROUGE-2 F1": 0.22950819672131148,
+        "ROUGE-L F1": 0.43548387096774194
+    },
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": " text discusses a pedagogical introduction to the sterile of the neutrinos, a are proposed particles that to resolve anomalies in neutrino data and maintain consistency with observed observed widths of the w and Z bosons. It text discusses existing anomalies and oscillation parameters, and for detecting sterile neutrinos, and the implications consequences of their existence. It also the loss loss of coherence in arino oscillations models with sterile neutrinos, highlighting the importance for The, the current discusses discusses searches search status of searches for a neutrinos states.",
+        "ROUGE-1 F1": 0.7514450867052023,
+        "ROUGE-2 F1": 0.4678362573099415,
+        "ROUGE-L F1": 0.6820809248554913
+    },
+    {
+        "Section Name": [
+            "1 Introduction"
+        ],
+        "Generated Summary": " text model of three generations of leptons in e, subon, and wau. grouped with in sults. Theutrinos have these generations obey den to interactions specificary p and Theutrinos fieldsators is with process field, in the interaction of lerinos and and w with the bosboson, is the changes in thept numbers.. The interactionsation rate of determinedscopic, the on therino masses. The the specific model-bodyutrino model is aicity, the more complex three equationtraging model shows a parameters such the behavioration length. The- modelsrino oscillation rates are the specific-neutrino model with with a propertiesrino behaviors distributions and The",
+        "ROUGE-1 F1": 0.3958333333333333,
+        "ROUGE-2 F1": 0.07368421052631578,
+        "ROUGE-L F1": 0.2604166666666667
+    },
+    {
+        "Section Name": [
+            "2 Anomalies in neutrino data"
+        ],
+        "Generated Summary": " text of an in neutrino data is been to the proposed of a sterile neutrino state. These anomalies are be described by a three-neutrino model with are seen as appearance appearance appearance and disappear of neutrinos.",
+        "ROUGE-1 F1": 0.7200000000000001,
+        "ROUGE-2 F1": 0.5205479452054794,
+        "ROUGE-L F1": 0.7200000000000001
+    },
+    {
+        "Section Name": [
+            "3 Concept of Sterile Neutrino"
+        ],
+        "Generated Summary": " text neutrino state involves adding a neutrino eld without the sm Model ( adding fourth left-handed le. leptons. Theermions masses are the sm Model are mass through Yukawa interactions involving scal scalar field with twoermions fields. The mass of frinos are not by the left fields with the massrangian with such in a massmassile neut neut-handed fieldrino field. is not have with the- W fieldsons. Theizations the dir fields of chargedptons, considering a-handed fields and mass left andptons and nonrinos. Theagonal and of the-dagonal fields- is used by the ofrices. leading to a between different andons and W non of. a left andptons and nonrinos. The",
+        "ROUGE-1 F1": 0.5225225225225225,
+        "ROUGE-2 F1": 0.15454545454545454,
+        "ROUGE-L F1": 0.40540540540540543
+    },
+    {
+        "Section Name": [
+            "4 Summary"
+        ],
+        "Generated Summary": "terile neutrinos are a hypothetical concept proposed to resolve anomaliesrino data anomalies. the context Model ( They the concept, a neutrinos are super super of active neutrinos fields, with the interaction amplitude vanishing on the numberherence of the states neutrino states. Theoret is that a in observations can be resolved by the is a disparity between active number of active and inert neutrino fields in the extension Model (. The data support inconsistent consistent of the sterile neutrino hypothesis, m mass of ev.V and a energies parameters. However, a is a evidence regarding accelerator and at data. suggests doubt on the due to sterile neutrino oscillation. Cosmologyological models suggests suggests the existence of a fourth neutrino with ev mass and velocity parameters. with the number mass for for these challenges, the research are shown potential to detect the existence of of a neutrinos in",
+        "ROUGE-1 F1": 0.6413793103448275,
+        "ROUGE-2 F1": 0.2986111111111111,
+        "ROUGE-L F1": 0.5517241379310346
+    },
+    {
+        "Section Name": [
+            "5 Acknowledgments"
+        ],
+        "Generated Summary": " text acknowledges various. K. Kumov and C. K. Kullenberg for their contributions of comments comments on the manuscript. It also mentions references number range of references works related works proceedings related to high-energy physics. including works by various authors. authors. as those. R. A et al. M. Rir,Sllo, al., M. Rak Aulkrahvi,, al., and others. R. Fhn.. al. Additionally works provide topics such highrinos-, highysics, and high physics.",
+        "ROUGE-1 F1": 0.5170068027210883,
+        "ROUGE-2 F1": 0.24827586206896549,
+        "ROUGE-L F1": 0.4625850340136054
+    },
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": " text discusses two questions of semusible rings by establishing establishing negative posed in establishing a new characterization of semiprime left goldie rings. It establishes shown that a semiprime ring r left goldie if it is regular left fusible and has a finite left goldie dimension.",
+        "ROUGE-1 F1": 0.7555555555555555,
+        "ROUGE-2 F1": 0.5909090909090909,
+        "ROUGE-L F1": 0.7333333333333333
+    },
+    {
+        "Section Name": [
+            "1. Introduction"
+        ],
+        "Generated Summary": " text introduces the concept of fusible rings, the context of associative rings with unity. It f-divisors are left regular elements are defined, while the notation of f fusible decom is introduced. The text also theusible decom left domains, including the and fusible rings, right introduces the between leftiparime and ffau and Thetial left are sem rings are finiteusible domains are also to be f fusible, The text also to establish the related by, introduces new concepts into f structure of fusible rings.",
+        "ROUGE-1 F1": 0.591715976331361,
+        "ROUGE-2 F1": 0.2874251497005988,
+        "ROUGE-L F1": 0.5088757396449705
+    },
+    {
+        "Section Name": [
+            "2. Results"
+        ],
+        "Generated Summary": " text discusses the concept of regular left fusible rings, introduces properties. It establishes the such such, and proofsmmas for to these fusible rings. their left fusible rings. It also the concept between leftusible and the leftusibility, rings, highlighting focusing the context of leftelian groups. the- The.f. rings. The text also del a related suchollaries, and proofsorems related left leftusible in highlightingaryf f, and ff rings, and fments rings, and left-. finite f fusible rings. The text concludes with a analysis that the existence of left ring left fusible ring in certainlynomial equations. the with",
+        "ROUGE-1 F1": 0.5948717948717949,
+        "ROUGE-2 F1": 0.27979274611398963,
+        "ROUGE-L F1": 0.482051282051282
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": " text discusses the X Phi Knights Landing, a method-level physics method that allows a to for to The also the importance of highMP and the and the fly, the the use of the X Phi inL in the science like text also the importance of theMP in the X Phi, and the Landing in the context.",
+        "ROUGE-1 F1": 0.45614035087719296,
+        "ROUGE-2 F1": 0.14285714285714285,
+        "ROUGE-L F1": 0.38596491228070173
+    },
+    {
+        "Section Name": [
+            "1 \u0412\u0432\u0435\u0434\u0435\u043d\u0438\u0435."
+        ],
+        "Generated Summary": " text to the importance of application of the HyperAXX method for the detection in particularly in application to the context of quantum. The study is been promise in the and in the scenarios, such is potential in been compared explored by the addition of a HOTI--. study is been the ability's ability in isability, making it a valuable tool for studying research.",
+        "ROUGE-1 F1": 0.46875,
+        "ROUGE-2 F1": 0.12698412698412698,
+        "ROUGE-L F1": 0.375
+    },
+    {
+        "Section Name": [
+            "2 \u041f\u043e\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0430 \u0437\u0430\u0434\u0430\u0447\u0438."
+        ],
+        "Generated Summary": " text discusses the new formula related the specific of numbers related a related by the specific of equations. is. The results involves the the between the and the specific range, the the conditions. to them numbers. results involves this problem involves using the distanceidean distance between points of points in the equation space,",
+        "ROUGE-1 F1": 0.46846846846846846,
+        "ROUGE-2 F1": 0.14678899082568805,
+        "ROUGE-L F1": 0.3963963963963964
+    },
+    {
+        "Section Name": [
+            "3 \u041f\u0430\u0440\u0430\u043b\u043b\u0435\u043b\u044c\u043d\u044b\u0439 \u0430\u043b\u0433\u043e\u0440\u0438\u0442\u043c \u043f\u043e\u0438\u0441\u043a\u0430 \u0434\u0438\u0441\u0441\u043e\u043d\u0430\u043d\u0441\u043e\u0432 PhiDD"
+        ],
+        "Generated Summary": " text discusses the new structure for calculatingance analysis in theX, The algorithm involves used to analyzing X Phi ( and is aizationations to analyze analyze the. The is generating mathematical and calculations to different of such the the applying the like on the conditions. algorithm is includes a such the, the entries, analyze the compareize the.. the computationance search..",
+        "ROUGE-1 F1": 0.3548387096774193,
+        "ROUGE-2 F1": 0.03278688524590164,
+        "ROUGE-L F1": 0.22580645161290322
+    },
+    {
+        "Section Name": [
+            "4 \u0412\u044b\u0447\u0438\u0441\u043b\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u044d\u043a\u0441\u043f\u0435\u0440\u0438\u043c\u0435\u043d\u0442\u044b."
+        ],
+        "Generated Summary": " refined discusses the methods on refinedism in refinedMP parallel. refined techniques. The refined involve analyzingative over a dataences and determine the and timeups the parallel for. The results and as the X processors X Phi are are used to analyze the- and in with the focus on optimizing processing and andVPUs and the highnlops.. refined involve analyzing optimization and optimization between compare the optimal efficient Vences for.",
+        "ROUGE-1 F1": 0.4,
+        "ROUGE-2 F1": 0.043478260869565216,
+        "ROUGE-L F1": 0.3
+    },
+    {
+        "Section Name": [
+            "5 \u0417\u0430\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435."
+        ],
+        "Generated Summary": " text of discusses the series on compiler compiler compiler discord for high timeret in time series data. high basis X Phi knights landing. yearsdimensional system. The algorithm utilizesages aCV and to efficient data, with a- results: the-putation and optimization. The results show that efficiencyability and the algorithm compared The work is supported for understanding applications, deep, finance, and finance change. require on high series data. study is the computation mining and retrievalization, high performance. various CPU Xeon Phi Knight Landing..",
+        "ROUGE-1 F1": 0.5176470588235293,
+        "ROUGE-2 F1": 0.15476190476190477,
+        "ROUGE-L F1": 0.3529411764705882
+    },
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": "uster editing, also known as correlation clustering, is transforming graph graph to adding or deleting edges to transform a cluster graph. This-world networks often overlap overlapping clusters, leading as those social networks biological networks. This new variant of in this paper involves forices to be split into two clustersices, allowing cluster more to be to multiple than one cluster. The technique approach is called vertex splitting with vertex splitting, is a to be effective-hard in canable in appliedized by a graph number of vert vert pairssplitting pairs vertex-spliting steps. paper demonstratesates a development of cluster new in with insights into the implications and potential applications for further it..",
+        "ROUGE-1 F1": 0.6396396396396397,
+        "ROUGE-2 F1": 0.2909090909090909,
+        "ROUGE-L F1": 0.4954954954954955
+    },
+    {
+        "Section Name": [
+            "Introduction"
+        ],
+        "Generated Summary": "uster editing involves transforming a graph into a disjoint union of cliques using a sequence number of edge-editing operations. The problem is NP-complete and is xable when parameterized by k total number edge-. Cl clustering results vertex vertex to one cluster, which vertex can be be a for theices play involved in multiple clusters. such enumer in gene regulatory networks. A address this issue a new variant is introduced, cluster editing with vertex splitting. which for more clusters without This text introduces that effectiveness approach can NP-complete and is the applicationization approach. proposedlynomial- is used for the parametersiques, algorithm also published as a on the, implementation analysis, and parameters, and cliques, and, and the work.",
+        "ROUGE-1 F1": 0.610878661087866,
+        "ROUGE-2 F1": 0.3544303797468355,
+        "ROUGE-L F1": 0.5355648535564854
+    },
+    {
+        "Section Name": [
+            "Preliminaries"
+        ],
+        "Generated Summary": " text discusses ainaries and graph graph paper on graph theory, log counting. It introduces graphs and graphs of positive up log sub, and, andgraphs, and clustersized complexity. The introduces cluster exponential-time hypothesis, introduces graphs, The text also the relationship of of a graphs, a-, the the validity-hardputteness. The text of proving theorem of logsat to to log- - length to - the into --. The text is the the graph graph process can a splitting is NP-com, can a solution solution. a same-time hypothesis. The",
+        "ROUGE-1 F1": 0.43956043956043955,
+        "ROUGE-2 F1": 0.12222222222222223,
+        "ROUGE-L F1": 0.2857142857142857
+    },
+    {
+        "Section Name": [
+            "NP-hardness"
+        ],
+        "Generated Summary": " text discusses the reduction-hardness of cluster editing with vertex splitting, highlighting that there are no O algorithms for the conditions are met. The reduction for does the section does not produce in in with constant maximum degree, but instead depends the maximum degree to the number of variable appearances. a. This cor a to the fact-hardness of -,satatsaction, restricted appear only to four in four most four clauses. The, cluster reductionollary that that cluster editing with vertex splitting remains NP-hard on graphs with maximum degree..",
+        "ROUGE-1 F1": 0.7403314917127072,
+        "ROUGE-2 F1": 0.4916201117318436,
+        "ROUGE-L F1": 0.6850828729281769
+    },
+    {
+        "Section Name": [
+            "The Edit-Sequence Approach"
+        ],
+        "Generated Summary": " this section of cluster editing with vertex splitting, the section SequenceSequence le shows that a can a spec structure, they adding edges, then removing edges, and finally splitting vertices. The approach holds to graph- problems that only adding addition, deletion deletion, or splits splits. The section involves that all vertex splittings can be moved to the back of the edit sequence, affecting the end. The, it establishes that twoanging edges spl and the back or the edit is in an equivalent edit sequence. The results are to the le that any edit sequence with be represented into an cluster edit with if the addition and deletions aree vertex splitsittings. text proof of proofs of the text is insights detailed framework for understanding the graph- problems.",
+        "ROUGE-1 F1": 0.6588235294117647,
+        "ROUGE-2 F1": 0.34782608695652173,
+        "ROUGE-L F1": 0.5333333333333334
+    },
+    {
+        "Section Name": [
+            "Critical Cliques"
+        ],
+        "Generated Summary": " cliques are a tool used to understand theique structure in graphs. A are defined vertets of vertices c each vertex is in a one critical clique. The critical clique quotient graph c nodes for each critical clique in and edgesacency conditions the if proximityacency. theiques. The lemma is from Lem works by the for critical theory and the-. with that the clusters vertex clique, a graph, there edges are be met. order context graph.. The lemma is further to derive a solution algebraordertex theory for aore- for graph context analysis.",
+        "ROUGE-1 F1": 0.5989304812834225,
+        "ROUGE-2 F1": 0.27027027027027023,
+        "ROUGE-L F1": 0.47058823529411764
+    },
+    {
+        "Section Name": [
+            "A 6k-vertex kernel "
+        ],
+        "Generated Summary": " section presents a existence of a problem kernel for cluster editing with vertex splitting based based at most k vertices. using on the rules and a clique lemmas. The reduction reduction rules are proposed, proving their effectiveness time efficiencyability and cluster a kernel kernel. The reduction involves removing isolated isolated cliques and bound the cliques to sizes based on the critical cliques' sizes. The there than k criticalices are in removing, the is in cluster cluster-out cluster The section of reducingiving the kernel kernel is vertex vertices is detailed to be efficient in linear time. a theorem of optimization. proofs. the rules. kernel of further the kernel's through, open question.",
+        "ROUGE-1 F1": 0.6607929515418502,
+        "ROUGE-2 F1": 0.3111111111111111,
+        "ROUGE-L F1": 0.5638766519823788
+    },
+    {
+        "Section Name": [
+            "An FPT algorithm"
+        ],
+        "Generated Summary": "uster editing with vertex splitting is shown to be X-parameter tractable. with a time time in o(k log k + n + m) The proof involves computing critical cliques of each vertex and the a critical clique quotient graph, and computingating over the solutionsings. determine the optimal solution. By le assumptions le of le assumptions, performing optimal-, theices, the optimal solution is be found. The the complexity for error performance, the solution time, the solution different approach is be needed to cluster more-clonent clustertime cluster. to the complexity of cluster solutions. The",
+        "ROUGE-1 F1": 0.6210526315789473,
+        "ROUGE-2 F1": 0.3404255319148936,
+        "ROUGE-L F1": 0.5578947368421052
+    },
+    {
+        "Section Name": [
+            "Conclusion"
+        ],
+        "Generated Summary": " text discusses the cluster editing to allowing a vertex to split into two vertices to It problem problem is called cluster editing with vertex splitting, is NP to be NP-complete and no O-time or O poly-time algorithms for leaving it k-vertex kernel and an-time algorithm are provided. The questions include the existence of a O--time algorithm for a linear-size kernel for Future work may needed to explore the parameters of the graphs and such edits, and theimations of text splitting approach is shown to be efficient to clust clusters clusters, is be extended to clust clust operations like proposedgments to acknowled to provided provided for",
+        "ROUGE-1 F1": 0.7272727272727273,
+        "ROUGE-2 F1": 0.4311926605504587,
+        "ROUGE-L F1": 0.6181818181818182
+    },
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": " text investigates the prospects for of a top quark decaying into one one higgs boson and a charm quark in top quark pair production at the Largeern Large Hadron Collider and future hadron colliers. A study a general-iggs doublet model to study the changingchanging neutral higgs interactions with t ch. followed to the w ++ e /t,. The study explores the discovery potential for this signal and with the background from dominant processes with including realistic cuts and tagging andiencies. Resultsising results are found for the LHC running at TV and and center hadciders. the center.",
+        "ROUGE-1 F1": 0.6871794871794872,
+        "ROUGE-2 F1": 0.455958549222798,
+        "ROUGE-L F1": 0.6358974358974359
+    },
+    {
+        "Section Name": [
+            "I Introduction"
+        ],
+        "Generated Summary": " standard model has which in explaining experimental data, leading the standardiggs boson, has to explore theiggs properties and explore physics beyond the standard model. The include the lack between Hermion massescycliggs interactionsplings and the lack of av changeschanging neutral currents. the levels. The H quark is mass is decay for into are also, The new-iggs doublet is isHG) is these such as massermion-Higgs coupling and the quark mass decay The results of high LargeHC and with the theory results, The of the H of of a-changing neutral currentsiggs bos and the quays is high LHC is also, highlighting the of and mass rates, and the experimentsider design.",
+        "ROUGE-1 F1": 0.4909090909090909,
+        "ROUGE-2 F1": 0.1743119266055046,
+        "ROUGE-L F1": 0.42727272727272725
+    },
+    {
+        "Section Name": [
+            "II The Higgs Signal and Physics Background"
+        ],
+        "Generated Summary": " section presents a cross section for the FN higIG signal in ppton-proton ( ( as well as the the dominant physics background processes. The highlights theynman diagrams of top quark pair production in ppton-proton collisions from gluon fusion and quark-antiquark fusion, followed one top quark decaying into a higiggs boson and a charm quark. while the other top into a b bon and a charmjjarks. The",
+        "ROUGE-1 F1": 0.7205882352941175,
+        "ROUGE-2 F1": 0.4477611940298507,
+        "ROUGE-L F1": 0.676470588235294
+    },
+    {
+        "Section Name": [
+            "III Realistic Acceptance Cuts"
+        ],
+        "Generated Summary": " text potential of the Fcnh signal from top decays at the LHC is explored using applying realistic basic cuts on tagging invari cuts on tagging,iencies, jetsjjets, and tagging selection on invariant mass of jets and cluster transverse mass. eliminate background events. The selection requirements remove more a% of the total background. Thements uncertainties in jet and lepton momenta lead to a masses that from true values. mt and m. The modeling these e, on the and C spec, the cross aims a cross section in pp t t t tch bjjc++ as /t + x at s\ufffdt = te.V and te TeV as a function of tc. along with total values. study also highlights a identification and section for for the in the temperaturesosities. the levels. as the potential abundance and for a fraction pointussian andok is thea is used to detect for the in",
+        "ROUGE-1 F1": 0.6508474576271186,
+        "ROUGE-2 F1": 0.3890784982935154,
+        "ROUGE-L F1": 0.5830508474576271
+    },
+    {
+        "Section Name": [
+            "IV Discovery Potential at the LHC"
+        ],
+        "Generated Summary": " text presents the results potential of theIG ( at the Large Hadron Collider (LHC) with future Hadron colliders with It presents curves for theiggs signals at the values levels, as sections for dominant processes, and estimates detection for detecting detectionability. The study also the cross required sections and for detection, with uncertainties, and the processes rates. The of results detectioniggs signal at sections for. the background signal with signal section for dominant, different energyosityities, and the potentialable different LHC. H H levels. The study show that detection at H HAS signal compared the energyosities. suggest. The potentialours are the L H are theT = s, are also, the energy levels, the LHC and with a results for H-energy HHC signals different-osityities. a large fraction range., the study L on for theAS for the = is t is is shown to with the detectionaded area showing the limit showing the. the lower% confidence level.",
+        "ROUGE-1 F1": 0.5354838709677419,
+        "ROUGE-2 F1": 0.16883116883116883,
+        "ROUGE-L F1": 0.3870967741935484
+    },
+    {
+        "Section Name": [
+            "V Conclusions"
+        ],
+        "Generated Summary": "icle theories beyond the standard model may have cont to tree-level Fcnh interactions, particularly for third generationgeneration quarks. These contributions arise found found in models with additional higIG doublets, such the special higiggs doublet model for the top quark or Discovery P colliders will potentially explore these contributions. with well by the discovery contours at the planecos, tc] plane for future scales levels. text also the implications occurrence rateors = the relationship effects in different centerHC. highlighting on thech c and. using the-atics analysis, the text explores that the decayHC could the energy levels can detect thech and the-, text suggests the importance of understanding theweak interactions breaking in thecnh interactions in particularlying at the research for higher Liders. the L.CHC. the general H-energy Hron.ider.",
+        "ROUGE-1 F1": 0.5303030303030303,
+        "ROUGE-2 F1": 0.22900763358778628,
+        "ROUGE-L F1": 0.40909090909090917
+    },
+    {
+        "Section Name": [
+            " Acknowledgments"
+        ],
+        "Generated Summary": " textcknowledgments section acknowledges gratitude to Kai-Feng Jack Chen for his discussions and The.A. Chen the in of Physics at the Universityemia Sinica and the High Energy Physics group at National Taiwan University for providing support hospitality during the research. The research was funding from the United.S. Department of Energy. the to publications. including, and research. contributed to the research.",
+        "ROUGE-1 F1": 0.7460317460317459,
+        "ROUGE-2 F1": 0.5,
+        "ROUGE-L F1": 0.6825396825396826
+    },
+    {},
+    {},
+    {},
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": " text discussesves into the known related to cosmic ray anisotropy in the pev and sub-PV energy region. These puzzles the so anisotropy,, the in the energy dependence of the first harmonic, amplitude and phase, and the contribution of a single source ray source. Key",
+        "ROUGE-1 F1": 0.7826086956521738,
+        "ROUGE-2 F1": 0.5111111111111111,
+        "ROUGE-L F1": 0.7391304347826088
+    },
+    {
+        "Section Name": [
+            "1 Introduction"
+        ],
+        "Generated Summary": " origin of cosmic rays is anisotropy is challenging due to the low level of steeply spectrum. Various research by only upper limit of theisotropy as but later studies showed that in the and phase. on spatial.. The variability is due by the non distribution of cosmic rays sources and properties medium properties. The the sub-pev and pev region spectrum, the well is observed, the sub ray sub. indicating a in understanding. to the an and theisotropy.. The studies questions have the field are need further.",
+        "ROUGE-1 F1": 0.5875706214689266,
+        "ROUGE-2 F1": 0.27428571428571424,
+        "ROUGE-L F1": 0.4971751412429378
+    },
+    {
+        "Section Name": [
+            "2 Puzzle 1: an inverse anisotropy"
+        ],
+        "Generated Summary": "TheTheaosotic magnetic fields ( cr rays (CRs to move from regions with higher to lower cr in the galaxy. The main system is main near 1 koplanarsecs from the galactic center is to a cr density and the galactic center, leading anisotropy. the flux from the inner galaxy. Crisinverse anisotropy\" phenomenon is observed in where the observed phase observed phases phases are are. with indicating to the differences field effects. the dust... The is is influence due by the scattering off the magnetic of high magnetic, by influence of galactic magnetic. the galaxy galaxy. Theredities in the flux flowra are that presence of a sources of the inner galaxy. to the an an anisotropy.",
+        "ROUGE-1 F1": 0.6068376068376069,
+        "ROUGE-2 F1": 0.22413793103448276,
+        "ROUGE-L F1": 0.4615384615384615
+    },
+    {
+        "Section Name": [
+            "3 Puzzle 2: peculiarity of the amplitude and phase"
+        ],
+        "Generated Summary": " text discusses the of the an anisotropy at focusing on the observed and equ of at The good is used to a parameters parameters: the amplitude coordinates, the equalo, and the weak stellar. The model is to capture the such as the small of fall of the amplitude at energy up the formation transition. different energies levels. The study of a h source to, to the results and and the the. the hisotropy.. The study is that the of an ray are from the halo, with the h source being to to the h-radvistic. The research are further are explored regarding with further need for further research on further. understand the model. its uncertainties uncertainties.",
+        "ROUGE-1 F1": 0.5084745762711865,
+        "ROUGE-2 F1": 0.17948717948717952,
+        "ROUGE-L F1": 0.4067796610169491
+    },
+    {
+        "Section Name": [
+            "4 Puzzle 3: the nature of the Single Source"
+        ],
+        "Generated Summary": " existence discusses the existence of a single source, explain the puzzlingness in the size spectrum of extensive air showers. The proposed involves based on the observation-uniformity and temporal distributions of SNnov ( and subsequent supernov remnants ( The single called the Diedieerence-\" was used to study for the single source, which is to determine the difference between properties between the showers from from the direction source and. from opposite direction. The data obtained that presence-- is the single source source,, with the research is needed. The study also the importance of further use source in role on the evolution evolution and to other influence of other sources jets.",
+        "ROUGE-1 F1": 0.6547085201793722,
+        "ROUGE-2 F1": 0.3167420814479638,
+        "ROUGE-L F1": 0.5650224215246636
+    },
+    {
+        "Section Name": [
+            "5 Conclusion"
+        ],
+        "Generated Summary": " text discusses the in in the pev and sub-pev energy region, various rays. References references are provided, highlight to the understanding of these ray nucleisotropy. including works by the origin of evolution of cosmic rays. well as the for studying these analyzing these ray nucle.. The text alsoline the importance of importance of the ray, highlighting the importance for further research and research to this area. The",
+        "ROUGE-1 F1": 0.6,
+        "ROUGE-2 F1": 0.2608695652173913,
+        "ROUGE-L F1": 0.5428571428571428
+    },
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": " text discusses precise precise description of the lowest two-sided cell of the left cells in it for a weighted coeter group of rank. It conject also conjectures and to the cells, provides a for the based ring of the cell two-sided cell.",
+        "ROUGE-1 F1": 0.7777777777777778,
+        "ROUGE-2 F1": 0.47727272727272724,
+        "ROUGE-L F1": 0.6666666666666666
+    },
+    {
+        "Section Name": [
+            "0. Introduction"
+        ],
+        "Generated Summary": " text discusses the conceptness of of a weighted coeter group. by L\u00fc L\u00fcztig. which focusing on the maximal weight value of the longest elements of the parabolic subgroups of the group. The conjecture is for weter groups with rank 1 or 3. with a by proving proof. a proof paper. The proof also precise detailed description of the weighted two-sided cell in the group, withoted as c, and provides calculation cells in it. It, it discusses conject conject conjectures hold for c c, provides with calculating a for to the based ring of c.",
+        "ROUGE-1 F1": 0.6871794871794872,
+        "ROUGE-2 F1": 0.3626943005181347,
+        "ROUGE-L F1": 0.6051282051282051
+    },
+    {
+        "Section Name": [
+            "1. Preliminaries"
+        ],
+        "Generated Summary": " section discusses the coeter groups and their rank- algebra. with them. It text discusses the structureaknikov groupKefzewskiovowski for thelynomials associated as well as theures and about theabor Szusztig about the structure of the grouple algebra under Key also introduces the properties of the in theeter groups, the a proof regarding the behavior of freedom of the Coxeter groups. Key text concludes with aollaries and to the group of elements in weighted groups, the a and the properties between groups in weighted groups.",
+        "ROUGE-1 F1": 0.5748502994011976,
+        "ROUGE-2 F1": 0.20606060606060606,
+        "ROUGE-L F1": 0.4431137724550898
+    },
+    {},
+    {
+        "Section Name": [
+            "3. The lowest two-side cell c0"
+        ],
+        "Generated Summary": " the section, the text of the lowest two-sided cell of a w coeter group is discussed. The text presents detailed and proofsorems related to the lowest two-sided cell of its decomposition into left and. The also presents proofs proof of the structure of left cells in the weighted. the Coxeter groups. rank rank. The, it proofs and proofs are the lowest of weighted in weighted group two-sided cell are presented, including with the and the propositions.",
+        "ROUGE-1 F1": 0.6832298136645963,
+        "ROUGE-2 F1": 0.38993710691823896,
+        "ROUGE-L F1": 0.5714285714285715
+    },
+    {
+        "Section Name": [
+            "4. The based ring of c0"
+        ],
+        "Generated Summary": " a weighted coeter group of rank,, the section ring j of its lowest two-sided cell c is studied. the section. The le is to calculate thextY for any x, y c the. which is a difficult problem. The lemma is introduced to that for any w w, C, there exists unique w w,, wj m, pw pj u j,, x y. suchj, that w = xw y. w cw = excpwfy. The le alsoifies the work by TxTy by any, y in C,, w, and it still challenging to section that further in showing that for any finiteyeter group N rank n, not n elementine groupil group, there a conditions, the,, w, u u, wxTy can be calculated as axTy... cx... section is proven by a lemmas and the existence two-sided cell c the coeter groups. is shown that for elementseter groups of not satisfy aipposable elements, and the impossible to calculate TxTy for le are discussed, including the le of the",
+        "ROUGE-1 F1": 0.6363636363636364,
+        "ROUGE-2 F1": 0.29268292682926833,
+        "ROUGE-L F1": 0.5212121212121211
+    },
+    {},
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": " text discusses a field construction for for groupcast index coding problems using utilizing the length scalar linear index code of is equal to the minrank of the side information hypergraph. The computationrank is is NP-hard due but the number introduces the notion for derive computation number time by considering minrank-critical edges in The, it algorithm is introduced to compute optimal solutionique cover for the optimal-information graph with The code code code are shown-size independent, are be used for a data. making solvingforming existing methods. solving of efficiency size. complexity comput size.",
+        "ROUGE-1 F1": 0.6736842105263158,
+        "ROUGE-2 F1": 0.2872340425531915,
+        "ROUGE-L F1": 0.5578947368421052
+    },
+    {
+        "Section Name": [
+            "I Introduction"
+        ],
+        "Generated Summary": " text discusses the index coding problem involving a transmitter with a set of k messages and a set of m receivers. where of a subset of messages and their-information and requiring another subset as want want-set. The transmitter takes coded messages over the the number of coded, that each receiver can decode its demanded message using its-information and coded coded messages. A problem can solved as acast index coding, where each receiver has exactly one message. The solution discusses a transformations such as group-, groupast, coding, andamped index, and group cover. explore the number rate. also a for techniques for such a of, II, foruristic techniques, solve the and improve a coding. differentcast index coding problems. are not of side receiver of. text also the importance of understanding and messages in the theations to to efficientrank and., it introduces a of proofsorewiseby-step implementation for solving a codes for different groups of receivers coding problems. text is to minimize the solutions for various the number of the codes and the scenarios. such in the communication..",
+        "ROUGE-1 F1": 0.6702702702702703,
+        "ROUGE-2 F1": 0.33695652173913043,
+        "ROUGE-L F1": 0.5243243243243243
+    },
+    {},
+    {},
+    {
+        "Section Name": [
+            "IV conclusion and discussions"
+        ],
+        "Generated Summary": " paper discusses a method to determine non of the nonrank-non-critical edges in a side-information graph. It method heuristic method is presented to determine the clique cover using binary operations on an adjacency matrix. The, a method is presented to address groupcast index coding problems. The study acknowledge further research of minrank properties and design design of algorithms efficient algorithms to compute the minrank of a side-information graph in The research was supported by the science and Engineering Board Board of Department Department of Science and Technology, Government of India. through a Jaw.C. Bose National Fellowship to to B. Sundar Rajan.",
+        "ROUGE-1 F1": 0.8000000000000002,
+        "ROUGE-2 F1": 0.5673076923076923,
+        "ROUGE-L F1": 0.7619047619047619
+    },
+    {},
+    {},
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": " text discusses equivalent conditions for existence existence of three solutions for a problem with discontinuous and strongly-singular terms in focusing on the Kirchhop- inurbed by a discontinuous nonlinearity of the heavilide type in the contextlicz-Soleelv space. The presence in by strongly presence-singular and non-continuous terms in to the a solutions for associ construction of solutions. with the on the behavior transfer of The study is generating such algebraxity, the optimization descentversion context space, with thelinearcontin andchhoff problems. as-singular termslinearity, anduous nonurbations, and the presencefactorplaceacian type. The",
+        "ROUGE-1 F1": 0.6378378378378379,
+        "ROUGE-2 F1": 0.32786885245901637,
+        "ROUGE-L F1": 0.5405405405405406
+    },
+    {
+        "Section Name": [
+            "1 Introduction"
+        ],
+        "Generated Summary": " text discusses the for the existence of three solutions for the quasilinear problem M a continuous-singular problem. The conditions presents an existence between these and the existence of solutions solutions for with the importanceuity nature-ity of the-linearity spaces. The aational analysis, the study presents the optimal- operator with the solution, demonstrates the existenceicity of solutions. The study result include presented, a applicationms and proofsollaries, highlighting the conditions sufficient conditions for the solutions. the the solutions. the problems. paper alsoizes the results into presenting the extending operators functionsbasedf functionsian, and the existencems and and presenting theicity and the contexts.",
+        "ROUGE-1 F1": 0.5346534653465347,
+        "ROUGE-2 F1": 0.20000000000000004,
+        "ROUGE-L F1": 0.37623762376237624
+    },
+    {
+        "Section Name": [
+            "2 Non-smooth analysis for locally Lipschitz functional"
+        ],
+        "Generated Summary": " section discusses the-smooth analysis, establishes appropriated assumptions under the-function, non-local term,, and discontinuous function f that approach ( pointsorems. It section introduces generalizedations and results on critical point theory for the functional and focusingoted by plus = and the the such as thema-Schidth functions and generalizeddifferential of It section also introduces ammaas and le related the such the generalized, suchions, and the of the points. The, it are made between the le of critical and the specific and the solutionsima, the analysis.. with to the construction that the solution is a critical points. with a andima and conve conve...",
+        "ROUGE-1 F1": 0.5865384615384616,
+        "ROUGE-2 F1": 0.30097087378640774,
+        "ROUGE-L F1": 0.5
+    },
+    {
+        "Section Name": [
+            "3 Proof of Theorem ??"
+        ],
+        "Generated Summary": " section discusses le proof of two theorem by proving proving le lemmas. The lemmas assume that such conve critical point of a theoremx functional at such its between adifferential and sub functionsients. The proof involves the theorem involves proving mathematical proofsulations and the properties of properties of the points. The section states the section involves based on the such from the works, is application of these conceptsmmas. section presentation of the properties involved to prove the le, highlighting insights detailed overview of the properties structure and.",
+        "ROUGE-1 F1": 0.5977011494252873,
+        "ROUGE-2 F1": 0.2558139534883721,
+        "ROUGE-L F1": 0.4482758620689655
+    },
+    {
+        "Section Name": [
+            "4 Proof of Theorem ??"
+        ],
+        "Generated Summary": " section discusses proving equival of equivalorem III, which the equivalences between, sets. The prove the equivalences, the lemmas are concepts are presented, The section obstacles include obtaining compact assumptions under the n-function to obtain compactness results for minimizing sequences on achieving obstacles in the sectionsences. The section concludes with demonstrating the discontinuity of the nonlinearity f, demonstrating the lemmas and for achieving theorem XX. section also mentions a to previous works on hom context of",
+        "ROUGE-1 F1": 0.6274509803921569,
+        "ROUGE-2 F1": 0.33112582781456956,
+        "ROUGE-L F1": 0.5098039215686275
+    },
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": " text discusses the use of capsule networks for handwritten characteric character recognition, focusing different with traditional convolutional neural networks.CNNs). and lenNet and Anet. Theule networks are spatial spatial invariance issues with different architectures, combining them routing, kernels. enhance betterivariant. The study have a networks in a to various indicic characters, found, demonstrating the effectiveness over traditionalNet and Alex ability to handle accuracy accuracy of handwritten conv. RNet. The contributions include conv networks, convolutional neural networks, dynamic recognition, andifier,, and conv learning.",
+        "ROUGE-1 F1": 0.5764705882352941,
+        "ROUGE-2 F1": 0.25,
+        "ROUGE-L F1": 0.4588235294117647
+    },
+    {
+        "Section Name": [
+            "I Introduction"
+        ],
+        "Generated Summary": " text discusses capsule concept of capsule networks, which are a challenges of invari invariance in convolutional neural networks.CNNs). Theses utilize trained by their features positions of features features, making capsule networks are a of kernels to work with pass information to dynamic routing. next relations relations. The network discusses experiments conducted the performance of these networks for various digit and character datasets. highlighting as handwrittenX,ari, B,, and othersugu.. using well as thela characters characters classical digit. The study of capsule networks is compared to traditional convs, Dpt and DNet, highlighting improvements significant in performance over compared with other neural. The research will into the performance of capsule networks and the convs to explore theally with the.",
+        "ROUGE-1 F1": 0.6083333333333334,
+        "ROUGE-2 F1": 0.3025210084033614,
+        "ROUGE-L F1": 0.49166666666666664
+    },
+    {
+        "Section Name": [
+            "II CNN Refresher"
+        ],
+        "Generated Summary": "verolutional neural networks areCNNs) are designed as -- convolution and pooling operations, followed well as non-linear activations in leading by a fully connected network for classification. Convolutional convolving a kernel over an input of height parameters such such in a output tensor of. by the like input height, input depth, and, and padding. Non-linear activations are as sigmoid, tanLU are used to convolution, Theing operationsresses a and, taking a values minimum values from while the rates sizes. The network output output ofor are then to a singleized, with into a conv connected network for which the is as a vector matrix. rates isLigeng., loss squaredfield error rate is errorproppropagation ( aizers are theD and the for single of of the networks and inputolutional classification, showingmitting theing operations re-linear activ. a.",
+        "ROUGE-1 F1": 0.5427509293680298,
+        "ROUGE-2 F1": 0.2397003745318352,
+        "ROUGE-L F1": 0.43122676579925656
+    },
+    {
+        "Section Name": [
+            "III The Capsule Network"
+        ],
+        "Generated Summary": " section of capsuleule Networks ( the concern of conventionalolutional Neural Networks (CNNs) by different are independently. Capsule networks involve a between kernels in allowing kernels layers receive higher activations when kernels corresponding with the parts of the object. A networkule Network proposed of two capsule digit capsule layers, with the capsules group convolutions to digit capsules group obtained by dynamic routing. The routing involves calculating agreement activation and different and integrating them into a.. The network's a tens- metric to the capsules, aization. a factoroder for for primary. the values. maximize lossfitting. The",
+        "ROUGE-1 F1": 0.59375,
+        "ROUGE-2 F1": 0.22105263157894736,
+        "ROUGE-L F1": 0.4479166666666667
+    },
+    {
+        "Section Name": [
+            "IV Experimentations and Results"
+        ],
+        "Generated Summary": "iments have conducted on capsule networks for handwritten indic digits and character databases comparing them with otheret and alexnet.. The experiments were used for with indic handwritten digit databases, three scripts, character databases in testingla, Theule networks wereformed Lenet and digit class tested with alexnet outper a optimized for outper better for. Theining the networks with a networks improved significant results on with theeeper learning rates and in capsule networks. The experiments resources was from the data, the networks, The prob study was a-of-the-art networks was that results for encoding implementation network,",
+        "ROUGE-1 F1": 0.5425531914893618,
+        "ROUGE-2 F1": 0.24731182795698925,
+        "ROUGE-L F1": 0.4361702127659574
+    },
+    {
+        "Section Name": [
+            "V Conclusion"
+        ],
+        "Generated Summary": "apsule networks have implemented on handwritten indic digits and character databases to showing their performance robust performance compared to the lenet architecture. Theining a networks with ALE networks like lenet and Anet improved in the performance. particularly the best performance achieved by combining anet with capsule networks for Theule networks canformed Lennet in having more parameters, but that convergence compared better ability to improve information that capsulenet failed. The capsule for learning with smaller features, improving an improvement technique for larger networks, capsule networks have limitations such slow iterative process and limited layerlayer routing. The research is needed to this area to",
+        "ROUGE-1 F1": 0.693069306930693,
+        "ROUGE-2 F1": 0.43,
+        "ROUGE-L F1": 0.6435643564356436
+    },
+    {},
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": " text discusses the PeLEbles-Vollenenkin quintessential in model ( discusses improvements in the with recent observations. The model P relies which P,, relies only of two parameters: the inaton mass min) and another smaller mass (m). to ensure that dark dark energy density is the universe is exceeds for about %% of the total energy budget. The valueaton mass ism) is calculated using the powerar perturbations of power spectrum, while the mass (m) is determined on rehe reheating temperature. is by solving dynam system solution initial conditions taken at matter-radiation equality. The model is to improve understand the behavior's structure and with on the rates darkessentialence.",
+        "ROUGE-1 F1": 0.6542056074766356,
+        "ROUGE-2 F1": 0.330188679245283,
+        "ROUGE-L F1": 0.5700934579439252
+    },
+    {},
+    {
+        "Section Name": [
+            "1 Introduction"
+        ],
+        "Generated Summary": " text discusses the addresses for various researchers involved various research. addresses information includes the, researchime.haro@upc.edu, jume.amoros@upc.edu, and supriya.maths@presiuniv.ac.il. as well as a link to the on thexiv:",
+        "ROUGE-1 F1": 0.6233766233766234,
+        "ROUGE-2 F1": 0.3733333333333333,
+        "ROUGE-L F1": 0.5714285714285715
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": " text discusses an new upper bound for the sum of fractional parts of smooth smooth functions in a arise naturally used in analytic number theory.. The main main is achieved through the use of Weyls bound for exponential sums and a device used by Popov.",
+        "ROUGE-1 F1": 0.6956521739130436,
+        "ROUGE-2 F1": 0.5111111111111111,
+        "ROUGE-L F1": 0.6739130434782609
+    },
+    {
+        "Section Name": [
+            "1. Introduction and main result"
+        ],
+        "Generated Summary": " text discusses the reduction of estimating of analytic number theory, introduces reduction of exponential sums to estimate problems problems. the Dirichlet divisor problem, theuss circle problem. The such by Weyl, van der Corput, and Vinogradov include used to estimate exponential sums, The text also a trunc method that states the previous previous results \" the cases, introduces ayl's methodncing method for the trunc called vanov to estimate the sum. The text shows a results for certain Dir sum and with leading to the mathematical in the fields such",
+        "ROUGE-1 F1": 0.6555555555555556,
+        "ROUGE-2 F1": 0.3370786516853933,
+        "ROUGE-L F1": 0.5222222222222223
+    },
+    {
+        "Section Name": [
+            "2. Technical lemmas"
+        ],
+        "Generated Summary": " section discusses le lemmas discusses proofs proofs for sums and propositionsal parts. The lemmas involve the between certain andoted by z numbers, their the such as the on the number of certainal parts and The proofs involve on theoreotation of the and which properties of theal parts, and the properties of the. obtain the properties results.",
+        "ROUGE-1 F1": 0.6140350877192983,
+        "ROUGE-2 F1": 0.19642857142857145,
+        "ROUGE-L F1": 0.5087719298245614
+    },
+    {
+        "Section Name": [
+            "3. Proof of Theorem ??"
+        ],
+        "Generated Summary": " section discusses the le of the le that le le and lemmas. It establishes finding conditions and partialulations to obtain at the result result. The results include the such the of partial of le, partial, and the consideration of the such The proof involves with the proof of a conditions and to the final of the desired.",
+        "ROUGE-1 F1": 0.5263157894736842,
+        "ROUGE-2 F1": 0.19642857142857142,
+        "ROUGE-L F1": 0.42105263157894735
+    },
+    {
+        "Section Name": [
+            "4. Extension to integer points close to smooth curves"
+        ],
+        "Generated Summary": " section discusses the adapted of the theory in to theness, It introduces a theorem r thatn) and a a bound of( a product number of a points close that for(z) = z\ufffd. The theorem is derived to the any integer,,k, and k certain rk, there set is r is obtained. on the conditions. The proof is compared compared to existing results results. showing the where r conditions are met.",
+        "ROUGE-1 F1": 0.6013986013986014,
+        "ROUGE-2 F1": 0.19858156028368795,
+        "ROUGE-L F1": 0.3916083916083916
+    },
+    {},
+    {
+        "Section Name": [
+            "Abstract"
+        ],
+        "Generated Summary": " text paper introduces a disparity model for disparityparity-Preserved Deep Cross-Platform Association forDDP) for cross-platform video recommendation. The model aims two such cross cross-platform recommendation approaches due such the platform due cross-platform association due to platform-spec disparity and semantic in semantic granularity. The modelA model aims a deep-con D-platformal Doencododer to handle and-spec information and integrate theularity differences. The results show various-time video show that the D DA model outperforms existing D-platform recommendations approaches in video of accuracy tasks tasks,",
+        "ROUGE-1 F1": 0.5777777777777777,
+        "ROUGE-2 F1": 0.2808988764044944,
+        "ROUGE-L F1": 0.5
+    },
+    {
+        "Section Name": [
+            "1 Introduction"
+        ],
+        "Generated Summary": "ender systems are become increasingly in to their increasing of online services, enabling to to engage on different platforms simultaneously. Cross-platform information associations are address the sparsity and improve accuracy accuracy. Howeveristing cross like on proving-platform performance but improve user, However, the in limitations differences between platforms can challenges in The address these issue a userjity Frameworkbasederving Topic Learning-Platform ( (DNN) framework is proposed, The model aims a user-dimensionalal Doencododer to analyze and informationspecific information and merge-ity to to address crossular issues. The user-platform D recommendation framework is on DA is proposed, demonstrated on various-world datasets, various and Facebook. with promise performance compared traditional platforms. The",
+        "ROUGE-1 F1": 0.45535714285714285,
+        "ROUGE-2 F1": 0.08108108108108109,
+        "ROUGE-L F1": 0.375
+    },
+    {
+        "Section Name": [
+            "2 Related Work"
+        ],
+        "Generated Summary": "isting cross-platform recommendation works can be divided into on two is associate, Traditional option isages different platform characteristics to cross applications, Another et al. propose a cross-platform collaborative learning framework based a nonparametric Bayesian dictionary learning model for Y et al. propose a cross-platform multi-modal topic model capable of differenting topicsalities. Y, Y user-centric approach focuses multiple sources of overl users activities. An example, anRpizes bridges different platforms through leveraging the from overlapped crowds. Y et al. propose an overlapped user-centric topic association framework based on latent attribute sparse coding, The approach-centric approach, an embedMCDRML embed, utilizing et al., which integrates learns user representations on matrix factorization and then maps them to a user-mod embedron. challenges approaches, the representationscentric approaches outper similarities same concept of brid-platform recommendation can be brid with with the importance of brid- inaches like the et al.' and Y et al. are this issue incorporating using information between enhancing the to strategies platforms. proposed ED framework outper topics-platform information based a user-centric manner, approachization approach the topic topic user,",
+        "ROUGE-1 F1": 0.6487935656836461,
+        "ROUGE-2 F1": 0.3665768194070081,
+        "ROUGE-L F1": 0.5522788203753352
+    },
+    {
+        "Section Name": [
+            "3 Measurement and Observation"
+        ],
+        "Generated Summary": " section discusses theating the in user interest between Twitter by analyzingizing them in a dataset-platform dataset linking It utilizes interest Dirichlet allocation to interest-seNE to the, showing that between cross interest between Twitter and YouTube. The cluster tool confirms the inconsistency by by The study also presents a new analysisbasederving t learning-platform interest (, a weighted-dimensionalal approachoencododer, detect clusters between users. different platforms. The study shows the-specific relationships and highlightsalities across showing theularity issues between differences the-platform user.. The also the regression andrices and provides a- regression in better datasets mat. The study's performance- and compared and with it a for cross-platform analysis analysis.",
+        "ROUGE-1 F1": 0.4711111111111111,
+        "ROUGE-2 F1": 0.1255605381165919,
+        "ROUGE-L F1": 0.35555555555555557
+    },
+    {},
+    {
+        "Section Name": [
+            "5 Cross-platform Video Recommendation"
+        ],
+        "Generated Summary": " section presents a cross-platform video rec approach based the proposedA model.",
+        "ROUGE-1 F1": 0.64,
+        "ROUGE-2 F1": 0.2608695652173913,
+        "ROUGE-L F1": 0.64
+    },
+    {
+        "Section Name": [
+            "6 Experiments"
+        ],
+        "Generated Summary": " section discusses experiments experiments on a real-platform dataset to comparing a proposed method with state state-of-the-art algorithms to demonstrate the advantages of the proposed approach.",
+        "ROUGE-1 F1": 0.7586206896551724,
+        "ROUGE-2 F1": 0.5357142857142857,
+        "ROUGE-L F1": 0.7586206896551724
+    },
+    {
+        "Section Name": [
+            "7 Conclusion"
+        ],
+        "Generated Summary": " text discusses a DA model to address inconsistency in cross-platform recommendation, presentsularity difference in It cross-platform video recommendation method based on the DCA model is demonstrated, demonstrating the demonstrating superiority superiority over state state. The paper also funding from various organizations organizations, references include works by cross learning for latent learning, and latent learning. cross..",
+        "ROUGE-1 F1": 0.5982905982905983,
+        "ROUGE-2 F1": 0.4,
+        "ROUGE-L F1": 0.52991452991453
+    }
+]
