@@ -69,6 +69,7 @@ def get_data_massager(tokenizer):
 
 def get_training_args(
 		num_epochs,
+		learning_rate,
 ):
 	return Seq2SeqTrainingArguments(
 		output_dir='./Checkpoints',
@@ -79,11 +80,12 @@ def get_training_args(
 		adam_beta1=0.9,
 		adam_beta2=0.999,
 		adam_epsilon=1e-8,
+		learning_rate=learning_rate,
 	)
 
-def train_model(model_name, num_epochs):
+def train_model(model_name, num_epochs, learning_rate):
 	model, tokenizer = get_model(model_name)
-	training_args = get_training_args(num_epochs=num_epochs)
+	training_args = get_training_args(num_epochs=num_epochs, learning_rate=learning_rate)
 
 	massage_data = get_data_massager(tokenizer)
 
