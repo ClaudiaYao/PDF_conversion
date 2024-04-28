@@ -45,7 +45,7 @@ def convert_json_to_csv_wrapper(json_file_full_name, converted_file_full_name):
 
 
 def convert_json_to_csv():
-    cur_path = os.getcwd() + "/dataset"
+    cur_path = os.getcwd() + "/data/dataset"
     convert_json_to_csv_wrapper(cur_path + "/dataset_ground_truth.json", cur_path + "/training.csv")
     convert_json_to_csv_wrapper(cur_path + "/dataset_eval_ground_truth.json", cur_path + "/eval.csv")
     convert_json_to_csv_wrapper(cur_path + "/dataset_test_ground_truth.json", cur_path + "/test.csv")
