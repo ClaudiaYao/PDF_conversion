@@ -41,22 +41,6 @@ def load_json(file_path):
 
 def get_data_massager(tokenizer):
 	def preprocess_function(sections):
-		"""
-		Function to preprocess data from JSON format, handling subsections.
-
-		Args:
-				examples: A dictionary containing "Text", "Groundtruth", and "Subsections" keys.
-
-		Returns:
-				A dictionary containing processed tensors for model input.
-		"""
-		# Concatenate text from subsections
-		# if sections["Subsections"]:
-		# 	subsection_text = " ".join([subsection["Text"] for subsection in sections["Subsections"]])
-		# 	sections["Text"] = sections["Text"] + " " + subsection_text
-
-		# inputs = tokenizer(sections["Text"], return_tensors="pt", padding=True, truncation=True, max_length=128)
-		# labels = tokenizer(sections["Groundtruth"], return_tensors="pt", padding=True, truncation=True, max_length=128)
 		inputs = tokenizer(sections["Text"], return_tensors="pt", padding=True, truncation=True, max_length=MAX_LENGTH)
 		labels = tokenizer(sections["Groundtruth"], return_tensors="pt", padding=True, truncation=True, max_length=MAX_LENGTH)
 
@@ -67,56 +51,33 @@ def get_data_massager(tokenizer):
 		}
 	return preprocess_function
 
-def get_training_args(
-		num_epochs,
-		learning_rate,
-):
+def get_training_args(**kwargs):
 	return Seq2SeqTrainingArguments(
 		output_dir='./Checkpoints',
-		num_train_epochs=num_epochs,
 		per_device_train_batch_size=8,
 		save_strategy='epoch',
-		lr_scheduler_type='linear',
+		evaluation_strategy="epoch",
 		adam_beta1=0.9,
 		adam_beta2=0.999,
 		adam_epsilon=1e-8,
-		learning_rate=learning_rate,
+		**kwargs
 	)
 
-def train_model(model_name, num_epochs, learning_rate):
+def train_model(model_name, **kwargs):
+	torch.cuda.empty_cache()
 	model, tokenizer = get_model(model_name)
-	training_args = get_training_args(num_epochs=num_epochs, learning_rate=learning_rate)
+	training_args = get_training_args(**kwargs)
 
 	massage_data = get_data_massager(tokenizer)
 
-	# train_data = load_data(
-	# 	os.path.join('..', 'dataset', 'dataset_ground_truth.json'),  # 100 pdfs
-	# 	split='train',
-	# )
-	# train_data = train_data.map(massage_data, batched=True)
-	# val_data = load_data(
-	# 	os.path.join('..', 'dataset', 'dataset_eval_ground_truth.json'),  #20 pdfs
-	# 	split='train',
-	# )
-	# val_data = val_data.map(massage_data, batched=True)
-
 	train_data = load_data_from_json(
-		os.path.join('..', 'dataset', 'dataset_ground_truth.json'),  # 100 pdfs
+		os.path.join('..', 'data', 'dataset', 'dataset_ground_truth.json'),
 	)
 	train_data = train_data.map(massage_data, batched=True)
 	val_data = load_data_from_json(
-		os.path.join('..', 'dataset', 'dataset_eval_ground_truth.json'),  #20 pdfs
+		os.path.join('..', 'data', 'dataset', 'dataset_eval_ground_truth.json'),
 	)
 	val_data = val_data.map(massage_data, batched=True)
-
-	# def compute_metrics(results):
-	# 	pred, labels = results
-	# 	rouge1, rouge2, rougeL= calculate_rouge_scores(pred, labels)
-	# 	return {
-	# 		"rouge-1": rouge1,
-	# 		"rouge-2": rouge2,
-	# 		"rouge-l": rougeL,
-	# 	}
 
 	trainer = Seq2SeqTrainer(
 		model=model,
@@ -124,13 +85,10 @@ def train_model(model_name, num_epochs, learning_rate):
 		args=training_args,
 		train_dataset=train_data,
 		eval_dataset=val_data,
-		# compute_metrics=compute_metrics,
 	)
 	trainer.train()
 	metrics = trainer.evaluate()
 	print(metrics)
-	# print("Evaluation Loss:", metrics["loss"])
-	# print("Rouge Score:", metrics["rouge1"])
 	return model, tokenizer, metrics
 
 DEVICE = 'cuda'
@@ -141,8 +99,6 @@ def test_model(section, model, tokenizer):
 	section_name = section["Section"]
 	ground_truth_summary = section.get("Groundtruth")[0]
 	if content and ground_truth_summary:
-		# Tokenize the content
-
 		inputs = tokenizer(content, return_tensors="pt", max_length=MAX_LENGTH, truncation=True)
 		labels = tokenizer(ground_truth_summary, return_tensors="pt", max_length=MAX_LENGTH, truncation=True)["input_ids"]
 
@@ -150,11 +106,6 @@ def test_model(section, model, tokenizer):
 		attention_mask = inputs["attention_mask"].to(DEVICE)
 		labels = labels.to(DEVICE)
 		with torch.no_grad():
-			# outputs = model(
-			# 	input_ids=input_ids,
-			# 	# num_beams=5,
-			# 	# no_repeat_ngram_size=2,
-			# )
 			outputs = model(
 				input_ids=input_ids,
 				attention_mask=attention_mask,
@@ -165,15 +116,9 @@ def test_model(section, model, tokenizer):
 			probs = torch.softmax(logits[0], dim=-1)
 			generated_ids = torch.argmax(probs, dim=-1)
 
-			# Decode the generated summary using the tokenizer
 			summary_text = tokenizer.decode(generated_ids, skip_special_tokens=True)
 			ground_truth_summary = tokenizer.decode(labels[0], skip_special_tokens=True)
 
-			# # Decode the generated summary using the tokenizer
-			# summary_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-			# ground_truth_summary = tokenizer.decode(labels[0], skip_special_tokens=True)
-
-			# Calculate ROUGE scores
 			rouge1_f1, rouge2_f1, rougeL_f1 = calculate_rouge_scores(summary_text, ground_truth_summary)
 
 		section_summary_results["Section Name"] = section_name
