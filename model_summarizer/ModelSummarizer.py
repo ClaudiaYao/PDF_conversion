@@ -39,7 +39,7 @@ class SummarizationModel(nn.Module):
       self.config= LEDForConditionalGeneration.from_pretrained(model_name).config
       self.optimizer = torch.optim.AdamW(self.model.parameters(), lr=1e-5, weight_decay=0.01)
       #self.scheduler = lr_scheduler.ReduceLROnPlateau(self.optimizer, mode='min', factor=0.1, patience=3, verbose=True)
-      self.scheduler = CosineAnnealingLR(self.optimizer, no_epochs=10)
+      self.scheduler = CosineAnnealingLR(self.optimizer, T_max=10)
       self.criterion = torch.nn.CrossEntropyLoss()        
 
 

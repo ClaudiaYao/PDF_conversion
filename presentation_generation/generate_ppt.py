@@ -256,7 +256,7 @@ def add_image(slide, placeholder_id, image_url):
         placeholder.crop_top = -difference_on_each_side
 
 def generate_section_level_ppt(theme, title_slide_data, toc_slide_data, content_slide_datas, section_image_paths):
-    prs = pptx.Presentation(f"ppt_themes/{theme}.pptx")
+    prs = pptx.Presentation(f"data/ppt_themes/{theme}.pptx")
 
     # Add title slide
     slide_layout = prs.slide_layouts[0] # title slide layout

@@ -4,3 +4,5 @@ openai
 pandas==2.2.1
 python-dotenv
 tiktoken
+python-pptx
+langchain
