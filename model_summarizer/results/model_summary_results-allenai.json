@@ -1,0 +1,146 @@
+[
+    {
+        "Section Name": "Abstract",
+        "Generated Summary": [
+            "The text introduces a hierarchical neural network called pointnet++ for deep hierarchical feature learning on point sets in a metric space. The network is able to learn deep point set features efficiently and robustly. It utilizes a nested partitioning of the input point set to learn local features with increasing contextual scales. by exploiting metric space distances, point sets are sampled with varying densities, which results in greatly decreased performance for networks trained on uniform densities. The study of point sets is challenging due to limitations in capturing local structures induced by metric space points, limiting the network's ability to recognize fine-grained patterns and generalizability to complex scenes. with further observation that point sets typically sampled with different densities results in reduced performance compared to networks trained with uniform density, novel set learning layers are proposed to adaptively combine features from multiple scales. experiments show that pointnet is able learn deep features efficiently, robustly, and efficiently."
+        ]
+    },
+    {
+        "Section Name": "1 Introduction",
+        "Generated Summary": [
+            "The text discusses the design of a hierarchical neural network, named as pointnet++, to process a set of points sampled in a metric space in a hierarchical fashion. Similar to convolutional neural networks (CNNs), pointnet is a pioneering effort that directly processes point sets. The study of point sets is challenging due to the entanglement of feature scale and non-uniformity of input point set. The paper introduces a new approach called pointNet++, which leverages local feature learning to abstract sets of points or features into higher level representations. The approach involves partitioning the point set into overlapping local regions by a distance metric, and applying pointnet recursively on a nested partitioning of the input set. Each partition is defined as a neighborhood ball in the underlying euclidean space, whose parameters include centroid location and scale. Different neighborhoods are further grouped into larger units and processed to produce higher level features. This process is repeated until the features of the whole point set are obtained. A key contribution of the paper is the introduction of a local feature learner called pointnet. The network learns a spatial encoding of each point and then aggregates all individual point features to form a global point cloud signature. The proposed approach"
+        ]
+    },
+    {
+        "Section Name": "2 Problem Statement",
+        "Generated Summary": [
+            "The text classification and segmentation of a discrete metric space is a key concept in the field of learning set functions. The text classification function is defined as a function that assigns a per point label to each member of a set of points in a metric space. The segmentation function assigns labels to each point in the metric space and assigns a label per point to each subset of points. It is shown that the classification function can be applied to discrete metric spaces with metric inherited from a Euclidean space."
+        ]
+    },
+    {
+        "Section Name": "3 Method",
+        "Generated Summary": [
+            "The text discusses the application of pointnet, a universal continuous set function approximator for point grouping and segmentation, with hierarchical structure. The text introduces the concept of pointNet, a set function approximation for point sets. The paper introduces a hierarchical feature learning framework called pointnet++, which is able to capture local context at different scales. The study of point sets in 2d euclidean space can be viewed as an extension of pointNET with added hierarchical structure, highlighting the importance of capturing local context. The section introduces a basic extension of the pointnet framework and introduces a new feature learning architecture called pointNET++."
+        ]
+    },
+    {
+        "Section Name": "3.2 Hierarchical Point Set Feature Learning",
+        "Generated Summary": [
+            "The text introduces a new architecture for local pattern recognition using convolutional neural networks ( cNNs) and convolutionally convolved networks ( CNCs). It utilizes a hierarchical grouping of points in a metric space to generate receptive fields in a data dependent manner. The input to this layer consists of a set of points with d-dim coordinates and c-dim point feature. The sampling layer selects a subset of points from input points, which defines the centroids of local regions. The grouping layer then constructs local region sets by finding neighboring points in the neighborhood of centroid points. The pointnet layer uses a mini-pointnet to convert flexible number of points into a fixed length local region feature vector."
+        ]
+    },
+    {
+        "Section Name": "3.3 Robust Feature Learning under Non-Uniform Sampling Density",
+        "Generated Summary": [
+            "It is common that a point set comes with nonuniform density in different areas. such non-uniformity introduces a significant challenge for point set feature learning. features learned in dense data may not generalize to sparsely sampled regions due to sampling deficiency. The text discusses the importance of grouping local regions and combining features from different scales to capture finer details in densely sampled regions. to address this challenge, we propose density adaptive layers in a hierarchical network with density adaptive pointnet layers. The network learns to combine features from regions of different scales when the sampling density changes. The layers are trained to learn an optimized strategy to combine multi-scale features based on local point densities."
+        ]
+    },
+    {
+        "Section Name": "3.4 Point Feature Propagation for Set Segmentation",
+        "Generated Summary": [
+            "In this section, we present a hierarchical propagation strategy for point features in set segmentation task. The propagation of features from subsampled points to original points is achieved using distance based interpolation and across level skip links. The feature propagation is achieved by interpolating feature values from subsample points to the original points using inverse distance weighted average based on k nearest neighbor interpolation. The interpolated features are then concatenated with skip linked point features from the set abstraction level. These features are passed through a unit pointnet, which is similar to one-by-one convolution in cnns. The process is repeated until features are propagated to original set."
+        ]
+    },
+    {
+        "Section Name": "4 Experiments",
+        "Generated Summary": [
+            "The text presents a new method for object and scene classification using point set based neural networks. It leverages a hierarchical learning architecture to address sparse and non-uniform sampling density variation. The method learns to balance descriptiveness and robustness by weighting point features based on multiple scales. The network learns to select point neighborhood of multiple scales and weights them to balance robustness and descriptivity. The approach is tested on four datasets ranging from 2d objects, 3d objects to real 3d scenes. The results show significant improvement in accuracy compared with previous state-of-the-art methods."
+        ]
+    },
+    {
+        "Section Name": "4.2 Point Set Segmentation for Semantic Scene Labeling",
+        "Generated Summary": [
+            "The text discusses the use of convolutional neural networks for image processing tasks such as point cloud classification, object labeling, and semantic object labeling. The text introduces a new approach for point cloud analysis, called density adaptive layer design ( msg)network, which learns on point clouds to avoid quantization error, 6 and conducts data dependent sampling to allow more effective learning. The proposed approach introduces hierarchical feature learning and captures geometry features at different scales, including wks, multi-scale curvature, and gaussian curvature in a metric space induced by pairwise geodesic distance along surfaces. The network learns to capture these features in a specific metric space and learns to predict shape classification using these features. The approach outperforms baseline methods in different tasks, including point set classification in non-euclidean metric space, semantic object label prediction in indoor scans, and non-rigid shape classification."
+        ]
+    },
+    {
+        "Section Name": "4.4 Feature Visualization.",
+        "Generated Summary": [
+            "The textural recognition of patterns in 3d point clouds is a challenging task. It involves recognizing patterns in a 3d space. The task is challenging due to the complexity of 3d structures in space and the difficulty in visualizing 3d patterns in 2d. It is challenging to recognize 3d shapes in a 2d space, especially in the 3d case. A key challenge is to identify patterns in space. This section introduces the concept of hierarchical networks, focusing on the first level kernels of a hierarchical network. The first layer kernels are used to learn 3d shape classification. The model is trained on modelnet40, which is mostly consisted of furniture."
+        ]
+    },
+    {
+        "Section Name": "5 Related Work",
+        "Generated Summary": [
+            "The text discusses how to apply deep learning to unordered point sets with distance metrics in 3d metric space. The study focuses on the problem of point feature extraction using convolutional neural network. The text explores the importance of considering the underlying distance metric in the design of point features for deep learning. A key issue is to select proper scale for point feature design. Different approaches have been developed regarding this, including volumetric grids, geometric graphs, and geometric graphs. However, in none of these works, the problem has been explicitly considered. In contrast to these approaches, the text focuses on unordered points sampled from a metric space, with non-uniform sampling density. This introduces difficulty for learning, especially for point features extraction, as point sampled from metric space are usually noisy and with noisy sampling density, leading to difficulty in extracting point features. In this work, we tackle these issues by explicitly considering the metric metric in our feature design and balance multiple feature scales in an end-to-end fashion."
+        ]
+    },
+    {
+        "Section Name": "6 Conclusion",
+        "Generated Summary": [
+            "The text discusses the use of neural networks for processing point sets sampled in a metric space. The text introduces the concept of pointnet++, a powerful neural network architecture for processing 3d point sets. It aims to address the challenge of learning hierarchical features with respect to the distance metric. The proposed network is based on a nested partitioning of the input point set, and is effective in learning hierarchical feature learning. To handle the non uniform point sampling issue, two novel set abstraction layers are proposed. These layers intelligently aggregate multi-scale information according to local point densities. These contributions enable us to achieve state-of-the-art performance on challenging benchmarks."
+        ]
+    },
+    {
+        "Section Name": "A Overview",
+        "Generated Summary": [
+            "The text presents a method for performing part segmentation and analysis on neighborhood query using a network architecture with a specific network architecture. The proposed method is based on the use of convolutional neural networks. The method involves training a network to analyze a set of data points in a noisy noisy environment. The network is trained on a noisy set of noisy data points and then used to perform a neighborhood query on the data. The algorithm involves training the network to perform part- and whole- segmentation using a specific set of parameters, including sampling randomness and time space complexity. The results show that the proposed method outperforms existing methods in terms of performance and efficiency. Additionally, the proposed algorithm outperforms traditional methods for performing neighborhood query in the presence of random sampling."
+        ]
+    },
+    {
+        "Section Name": "B Details in Experiments",
+        "Generated Summary": [
+            "The text- and image-to-multimedia ( text- to-video)interaction layer is a key concept in the field of image processing. It represents a set abstraction level with k local regions of ball radius r using pointnet of d fully connected layers with width li. It is used to represent msg with m scales. The text layer represents a fully connected layer with width l and dropout ratio dp. The feature propagation layer is used for updating features concatenated from interpolation and skip link. The image layer is followed by batch normalization and relu."
+        ]
+    },
+    {
+        "Section Name": "B.1 Network Architectures",
+        "Generated Summary": [
+            "The sectional classification of scenes is a key concept in the field of machine learning. It involves the identification of objects in a noisy noisy environment. It is crucial for understanding the process of classification. The classification of noisy scenes can be achieved using a multi-scale grouping network architecture. The sectional grouping network is a cross level multi-resolution grouping network. It consists of a set of branches, branches with different resolutions, branches using different regions of original points, and branches using all original points. Branch 1 and branch 2 are concatenated and fed to branch 4. Branch 3 and branch4 are then fed to branches 1 and 2. output of branch 3 and Branch4 are used to concatenate and feed to branch 5. Branch 4. Output of branch 1 and Branch 2 are then used to feed branch 4 for classification. Branch 5."
+        ]
+    },
+    {
+        "Section Name": "B.2 Virtual Scan Generation",
+        "Generated Summary": [
+            "In this section, we describe how to generate labeled virtual scan with non-uniform sampling density from scannet scenes. This section describes the process of generating labeled virtual scans with non - uniform sampling density. The method involves rotating camera orientation in the horizontal plane evenly in 8 directions and rotating camera location 1.5m above the centroid of the floor plane and rotate the camera orientation to rotate camera orientation evenly in eight directions. The camera orientation is rotated in a horizontal plane and cast rays from camera through each pixel to the scene. This method is used to select visible points in a scene."
+        ]
+    },
+    {
+        "Section Name": "B.3 MNIST and ModelNet40 Experiment Details",
+        "Generated Summary": [
+            "The text representation of digit pixels in images can be transformed into a 2d point cloud with coordinates within, where the image center is the origin point. augmented points are created to add the point set up to a fixed cardinality. For digit pixels, digit pixels are converted into 2d points using digit pixels. The digit pixels can be used to represent digit points. The text representation is generated by converting digit pixels from digit pixels into a point cloud. The point cloud is then converted to a 2-dimensional point cloud, with the center of the point cloud as origin point, where image center."
+        ]
+    },
+    {
+        "Section Name": "B.4 ScanNet Experiment Details",
+        "Generated Summary": [
+            "Scannet is a tool to generate training data from scannet scenes. It uses a set of cubes to generate point labels for each point in a scene, then merge label prediction in all the cubes from a same scene. The training data is generated by splitting the test scene into smaller cubes and merging label prediction for every point in the cubes first. The final point label prediction is then merged using a majority voting method to get final point labels. The method is tested on real scenes."
+        ]
+    },
+    {
+        "Section Name": "B.5 SHREC15 Experiment Details",
+        "Generated Summary": [
+            "The textural properties of a point are determined by the geometry of the point, leading to a set of features for each point. The textural features can be used to determine the shape of a given point, providing insights into the structure of the world. The study of the textural aspects of points is crucial for understanding the structure and dynamics of the universe, with implications for the understanding of the formation and evolution of galaxies and supermassive black holes in the context of geodesic distance modeling."
+        ]
+    },
+    {
+        "Section Name": "C More Experiments",
+        "Generated Summary": [
+            "The text discusses the section discusses the application of the proposed network architecture in the context of quantum information processing. The section introduces the concept of a network architecture. The text also delves into the analysis of the effect of the network architecture on the dynamics of the system in the presence of a single- and double-band interference. The analysis is based on the section presented in the section. Additionally, the section provides more experiment results to validate and analyze the proposed model. The results are compared with the experimental data."
+        ]
+    },
+    {
+        "Section Name": "C.1 Semantic Part Segmentation",
+        "Generated Summary": [
+            "The sectionation of shapes represented by point clouds is a challenging task, highlighting the importance of hierarchical feature learning for detailed semantic understanding. This section introduces a new approach for segmentation task using point cloud analysis. The task involves predicting a part label for each point. The dataset consists of 16,881 shapes from 16 classes, annotated with 50 parts in total. Each shape is represented by a set of point clouds with normal directions, with each point representing a specific shape. Each point is equipped with its normal direction to better depict the underlying shape. This approach is compared with traditional learning based techniques, as well as state-of-the-art deep learning approaches in the context of segmentation tasks. The approach utilizes a set operation unit for multi-scale neighborhood selection based on set operation units. Cross-entropy loss is minimized during training. The performance of the approach is evaluated on the Shapenet part dataset."
+        ]
+    },
+    {
+        "Section Name": "C.2 Neighborhood Query: kNN v.s. Ball Query.",
+        "Generated Summary": [
+            "The text presents a method to select a local neighborhood based on ball query. The text explores the relationship between search radius and k. The method involves selecting a ball with a specific search radius. The search radius is defined as the number of points in the neighborhood. The study compares two methods, radius based ball query and knn based neighborhood search. The paper also compares the performance of radius based and knN-based neighborhood search methods. Evaluation metric is classification accuracy on modelnet 40 test set. Results show that radius based query is slightly better than knN based method."
+        ]
+    },
+    {
+        "Section Name": "C.3 Effect of Randomness in Farthest Point Sampling.",
+        "Generated Summary": [
+            "The text- and image-based classification algorithm is a key concept in machine learning. The text-based model for image classification is crucial for machine learning applications, especially for image processing tasks like image recognition, image processing, and image processing. It is important to understand the accuracy and stability of image recognition algorithms. The accuracy of image classification relies on the quality of the input data and the accuracy of input data, while image recognition is important for image recognition. In this work, using a set abstraction level, we introduce a sampling layer for point set sub sampling. The sampling layer is based on farthest point sampling ( fps) algorithm. The algorithm is robust to sampling randomness. The model is trained on modelnet40 test shapes and tested for feature stability."
+        ]
+    },
+    {
+        "Section Name": "C.4 Time and Space Complexity.",
+        "Generated Summary": [
+            "The text discusses comparison of time and space efficiency of a few point set based deep learning method with a few networks. The model size and inference time are compared using tensorflow 1.1 with a single gtx 1080. While pointnet has the best time efficiency, our model without density adaptive layers achieved smallest model size with fair speed. It's worth noting that while pointnet achieves the best model size efficiency, it's 2x more expensive compared to ssG version due to multi-scale region feature extraction."
+        ]
+    }
+]

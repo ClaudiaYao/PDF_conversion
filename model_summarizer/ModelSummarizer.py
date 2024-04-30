@@ -174,6 +174,7 @@ class SummarizationModel(nn.Module):
                                    attention_mask=attention_mask, 
                                    global_attention_mask=global_attention_mask, 
                                    max_length=seq_length, 
+                                   min_length=100,
                                    num_beams=4,
                                    no_repeat_ngram_size=3,
                                    early_stopping=True, 
