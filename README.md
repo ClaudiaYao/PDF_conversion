@@ -25,6 +25,12 @@ This folder contains code to generate labeled datasets for training, evaluation 
 This folder contains the code to fine-tune the LLM models. The sub folders `logs` and `results` are used to store logging files and model training results.
 The file `model_training_evaluate_pipeline.jpynb` supports running both locally and on Colab. Follow the instructions in the Notebook to run and check the result.
 
+#### bart_summarizer
+
+`bart_summarizer.py`: contains the training and testing implementation using `BartForConditionalGeneration` and `Seq2SeqTrainer`.
+`bart_summarizer.ipynb`: contains the experiment code to tune the selected hyperparameters. Note that the training results are recorded and hard-coded values are used while plotting the diagrams. This was done to save time during the experiment.
+`results/bart_large_results.json`: contains the testing results including the generated text and their rouge scores.
+
 ### presentation_generation
 This folder contains the code to generate presentation.
 
