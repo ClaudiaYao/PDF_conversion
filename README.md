@@ -17,7 +17,8 @@ This folder stores raw PDF file (paper_PDF folder), the generated training, veri
 
 ### data_preparation
 This folder contains code to generate labeled datasets for training, evaluation and test. 
-`prepare_data.ipynb`: generates the 3 json files under `data/dataset`. 
+
+`prepare_data.ipynb`: generates the 3 json files under `data/dataset`.
 
 ### model_summarizer
 
