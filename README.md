@@ -7,6 +7,7 @@
 3. To run the full pipeline, run 'run_pipeline.ipynb'. Note: Provide an OpenAI API key in a .env file if you wish to use GPT functions.
 
 ## Sub Module Introduction
+
 ### processing_pdf
 
 This module will separate long PDF document into sections and subsections based on table of content. Check README.md in the folder `processing_pdf`.
@@ -16,7 +17,8 @@ This module will separate long PDF document into sections and subsections based 
 This folder stores raw PDF file (paper_PDF folder), the generated training, verification and test dataset (dataset and dataset2 folders). PPT templates and generated presentation. It contains a Python file to convert JSON format to simpler, more straightforward CSV file. Check README.md in the folder `dataset`. In `dataset2` folder, a Python file `further_cleanup_json.py` is used to conduct further cleanup for the input data.
 
 ### data_preparation
-This folder contains code to generate labeled datasets for training, evaluation and test. 
+
+This folder contains code to generate labeled datasets for training, evaluation and test.
 
 `prepare_data.ipynb`: generates the 3 json files under `data/dataset`.
 
@@ -32,5 +34,5 @@ The file `model_training_evaluate_pipeline.jpynb` supports running both locally 
 `results/bart_large_results.json`: contains the testing results including the generated text and their rouge scores.
 
 ### presentation_generation
-This folder contains the code to generate presentation.
 
+This folder contains the code to generate the final PowerPoint presentation. Check README.md in the folder `presentation_generation`.
