@@ -144,3 +144,41 @@ def calculate_rouge_scores(generated_summary, ground_truth_summary):
 	rouge2_f1 = scores['rouge2'].fmeasure
 	rougeL_f1 = scores['rougeL'].fmeasure
 	return rouge1_f1, rouge2_f1, rougeL_f1
+
+#Model Inference
+#Generate Summary for the content using the loaded model
+def generate_summary(content, model, tokenizer):
+	max_length=300
+	num_beams=4
+	inputs = tokenizer(content, return_tensors="pt", max_length=1024, truncation=True)
+	summary_ids = model.generate(inputs.input_ids.to(DEVICE), max_length=max_length, num_beams=num_beams, early_stopping=True)
+	summary_text = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+	return summary_text
+
+#Parse each sections and subsection to generate summaries from the model
+def process_section(section,results, model, tokenizer): 
+	# Process the content of the each section
+	section_summary_results = {}
+	content = section["Text"]
+	section_name=section["Section"]
+	summary_text = generate_summary(content, model, tokenizer)
+	section_summary_results["Section Name"] = section_name
+	section_summary_results["Generated Summary"] = summary_text
+	results.append(section_summary_results)
+	print("Section Name: ", section_name)
+	wrapped_output = textwrap.fill(str(summary_text), width=80)
+	print("Generated Summary: ", wrapped_output)
+	# Process the subsections if they exist
+	if "Subsections" in section:
+		for subsection in section["Subsections"]:
+			process_section(subsection,results, model, tokenizer)
+		
+			
+# Summarize the section contents and subsection contents
+def summarize_pdf(pdf_data, output_file, model, tokenizer):
+	all_results = []
+	for section in pdf_data:
+		process_section(section,all_results, model, tokenizer)
+	
+	with open(output_file, "w+") as json_file:
+		json.dump(all_results, json_file, indent=4)    
