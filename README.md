@@ -16,7 +16,8 @@ This module will separate long PDF document into sections and subsections based 
 This folder stores raw PDF file (paper_PDF folder), the generated training, verification and test dataset (dataset and dataset2 folders). PPT templates and generated presentation. It contains a Python file to convert JSON format to simpler, more straightforward CSV file. Check README.md in the folder `dataset`. In `dataset2` folder, a Python file `further_cleanup_json.py` is used to conduct further cleanup for the input data.
 
 ### data_preparation
-This folder contains code to generate training/verification datasets. That is, running the Notebook code in this folder will generate the dataset of folder `data`.  
+This folder contains code to generate labeled datasets for training, evaluation and test. 
+`prepare_data.ipynb`: generates the 3 json files under `data/dataset`. 
 
 ### model_summarizer
 
