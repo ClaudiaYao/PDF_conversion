@@ -28,9 +28,13 @@ This folder contains the code to fine-tune the LLM models. The sub folders `logs
 The file `model_training_evaluate_pipeline.jpynb` supports running both locally and on Colab. Follow the instructions in the Notebook to run and check the result.
 
 #### allenai_summarizer
-'allenai_summarizer.py' contains the code to define the model, pre-processing functions and functions to train, evaluate and test the model.
-'allenai_LED_model_trainng.ipynb' has the Colab notebook to see the plots of training and validation loss and the Rogue scores. The results of the evaluation using the test set are available in the notebook.
-'allenai_LED_model_inference.ipynb' has the Colab notebook with the link to download the model checkpoint. The LED model is loaded from the checkpoint in this notebook and the inference using the LED model using a pdf are also shown in the output.
+
+`allenai_summarizer.py`: contains the code to define the model, pre-processing functions and functions to train, evaluate and test the model.
+
+`allenai_LED_model_trainng.ipynb` : Colab notebook to see the plots of training and validation loss and the Rogue scores. The results of the evaluation using the test set are available in the notebook.
+
+`allenai_LED_model_trainng.ipynb` : Colab notebook with the link to download the model checkpoint. The LED model is loaded from the checkpoint in this notebook and the inference using the LED model using a pdf is  shown in the output.
+
 Follow the instructions in the notebook to run and check the result.
 
 
