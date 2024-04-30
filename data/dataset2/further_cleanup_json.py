@@ -67,6 +67,7 @@ def cleanup(content):
     result = re.sub(r" , ", "", result)
     result = re.sub(r"\w\.", "", result)
     result = re.sub(r"\d\.", "", result)
+    result = re.sub(r"\b[\w\.-]+@[\w\.-]+\.\w+\b", "", result)
     return result
             
 # recursively find all the sections/subsections and replace its content with cleaned up text    
@@ -96,8 +97,9 @@ def cleanup_wrapper(json_file_full_name, converted_file_full_name):
 def cleanup_all():
 
     cur_path = os.getcwd() + "/data/dataset2"
-    cleanup_wrapper(cur_path + "/dataset.json", cur_path + "/dataset3.json")
-    cleanup_wrapper(cur_path + "/dataset_eval.json", cur_path + "/eval3.json")
-    cleanup_wrapper(cur_path + "/dataset_test.json", cur_path + "/test3.json")
+    cleanup_wrapper(cur_path + "/dataset3_ground_truth.json", cur_path + "/dataset4.json")
+    cleanup_wrapper(cur_path + "/eval3_ground_truth.json", cur_path + "/eval4.json")
+    cleanup_wrapper(cur_path + "/test3_ground_truth.json", cur_path + "/test4.json")
+
 
 cleanup_all()

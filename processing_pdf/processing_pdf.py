@@ -477,7 +477,7 @@ def separate_content(text, table_of_content):
 
         if level1_index == 0 and level1_title == "No_title":
             content = clean_text(level1_texts[0], word_tokenize, lemmatizer, stop_words)
-            record = {"level_1": "Abstract", "level_1_content": content}
+            record = {"text":content, "section": "Abstract"}
             processed_content.append(record)
             output_json_format["Abstract"]["Text"] = content
             continue
@@ -488,7 +488,7 @@ def separate_content(text, table_of_content):
         if len(level2_titles) == 0 and len(level2_texts) == 0:
             content = clean_text(level1_texts[level1_index], word_tokenize, lemmatizer, stop_words)
 
-            record = {"level_1": level1_title, "level_1_content": content}
+            record = {"text": content, "section": level1_title}
             processed_content.append(record)
             # json file requires special format
             
@@ -508,9 +508,8 @@ def separate_content(text, table_of_content):
                     # did not find any sub sections, then just record all the section text
                     if len(level3_titles) == 0 and len(level3_texts) == 0:
                         content = clean_text(level2_texts[level2_index],word_tokenize, lemmatizer, stop_words)
-                        record = {"level_1": level1_title, 
-                                  "level_2": level2_title,
-                                "level_2_content": content}
+                        record = {"text": content, "section": level1_title, 
+                                  "subsection": level2_title}
                         processed_content.append(record)
                         
                         output_json_format[level1_title]['Subsections'].append({"Section_Num": get_section_num(level2_title) , "Section": level2_title, "Text": content, "Subsections": [],
@@ -519,9 +518,8 @@ def separate_content(text, table_of_content):
                     else:
                         for level3_index, level3_title in enumerate(level3_titles):
                             content = clean_text(level3_texts[level3_index], word_tokenize, lemmatizer, stop_words)
-                            record = {"level_1": level1_title, "level_2": level2_title, 
-                                      "level_3": level3_title,
-                                    "level_3_content": content}
+                            record = {"text": content, "section": level1_title, "subsection": level2_title, 
+                                      "subsubsection": level3_title}
                             processed_content.append(record)
                             
                             
@@ -533,8 +531,7 @@ def separate_content(text, table_of_content):
                                         output_json_format[level1_title]['Subsections'][k].append({"Section_Num": get_section_num(level3_title), "Section": level3_title, "Text": content, "Groundtruth": ""})
                 else:
                     content = clean_text(level2_texts[level2_index], word_tokenize, lemmatizer, stop_words)
-                    record = {"level_1": level1_title, "level_2": level2_title,
-                              "level_2_content": content}
+                    record = {"text": content, "section": level1_title, "subsection": level2_title}
                     processed_content.append(record)
 
                     output_json_format[level1_title]['Subsections'].append({"Section_Num": get_section_num(level2_title), "Section": level2_title, "Text": content, "Subsections": [],
