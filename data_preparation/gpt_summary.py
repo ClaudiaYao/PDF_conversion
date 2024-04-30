@@ -7,8 +7,6 @@ from openai import OpenAI
 load_dotenv()
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
-client = OpenAI()
-
 def generate_prompt(section_name, section_text):
     prompt = f"""
 Summarise the text with sufficient information for a technical presentation. Go straight into the summary, do not quote back the section name or start with "The section discusses..." or similar wording.
@@ -36,6 +34,8 @@ def get_truncated_prompt(prompt):
     return prompt
 
 def get_gpt_response(prompt):
+    client = OpenAI()
+
     try: 
         response = client.chat.completions.create(
         model="gpt-3.5-turbo-0125",

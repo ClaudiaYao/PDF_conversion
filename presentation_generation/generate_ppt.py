@@ -15,8 +15,6 @@ from transformers import BlipProcessor, BlipForConditionalGeneration
 load_dotenv()
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
-llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0, openai_api_key=OPENAI_API_KEY)
-
 # For image captioning
 blip_processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-large")
 blip_model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-large")
@@ -124,6 +122,8 @@ def get_section_image_paths(section):
     return image_paths
 
 def get_title_slide_data(article_name):
+    llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0, openai_api_key=OPENAI_API_KEY)
+
     paper_title, abstract = get_meta(article_name)
 
     title_slide_parser = PydanticOutputParser(pydantic_object=TitleSlide)
@@ -148,6 +148,8 @@ Abstract:
     return title_slide_data
 
 def get_toc_slide_data(article_name, section_names):
+    llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0, openai_api_key=OPENAI_API_KEY)
+
     paper_title, abstract = get_meta(article_name)
 
     toc_slide_parser = PydanticOutputParser(pydantic_object=ContentSlide)
@@ -172,6 +174,8 @@ Section names:
     return toc_slide_data
 
 def get_content_slide_datas(section_names, section_texts):
+    llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0, openai_api_key=OPENAI_API_KEY)
+
     content_slide_parser = PydanticOutputParser(pydantic_object=ContentSlides)
 
     content_slide_prompt = PromptTemplate(
